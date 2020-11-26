@@ -5,13 +5,10 @@
 
 ## What's an API?
 
-**API** stands for **Application Programming Interface**
+**API** stands for **Application Programming Interface**  
 
-... and here's a definition:
-
-> A set of functions and procedures allowing the creation of applications that access the features or data of an operating system, application, or other service.
-
-*Source: Oxford Languages via [Google](https://www.google.com/search?q=api+definition)*
+- APIs allow applications to **communicate** with one another
+- APIs **simplify tasks** requiring interactions with other systems
 
 ## Web APIs
 

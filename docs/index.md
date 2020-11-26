@@ -13,6 +13,3 @@ You'll be working with the [Spotify API](https://developer.spotify.com/documenta
 - Using the **repl.it database** to store and retrieve data
 - Using `flask` and `jinja` templates to serve **dynamic web pages**
 - Customizing the look of our web app using **Bootstrap** and **CSS** 
-
-[--> Tutorial](tutorial/)
-
