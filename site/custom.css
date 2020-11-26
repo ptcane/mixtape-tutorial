@@ -1,15 +1,6 @@
 .prompt{width: 0px; min-width: 0px; visibility: collapse}
 
-strong{color: #2C3E50}
-
-blockquote > p {
-    color: #2C3E50;
-    border: none!important;
-}
-
-blockquote {
-    box-shadow: none;
-}
+strong{color: #5AA2B8;}
 
 h1, h2, h3, h4, h5 {color: #333333}
 

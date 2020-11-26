@@ -85,7 +85,7 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="2"><a href="#undertanding-the-api-structure" class="nav-link">Undertanding the API structure</a>
+            <li class="nav-item" data-level="2"><a href="#api-endpoints" class="nav-link">API endpoints</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -100,7 +100,7 @@
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#json-structure-and-nesting" class="nav-link">JSON structure and nesting</a>
+            <li class="nav-item" data-level="2"><a href="#json-structure" class="nav-link">JSON structure</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -113,7 +113,7 @@
 <a target="_blank" href="../requests-get-data-slides.html" class="btn btn-outline-secondary">Slideshow</a>
 </div>
 <h1>Getting data with <code>requests</code></h1>
-<h2 id="undertanding-the-api-structure">Undertanding the API structure</h2>
+<h2 id="api-endpoints">API endpoints</h2>
 <p>Our first port of call should be the <a href="https://developer.spotify.com/documentation/web-api/reference/">documentation</a> - take a look around the sections in the <strong>API Endpoint Reference</strong>.</p>
 <p>You'll discover:</p>
 <ul>
@@ -177,7 +177,7 @@ print(list(data.keys()), '\n\n', data['name'])
 <li>we took a look at the <code>list</code> of <code>.keys()</code> in the resulting dictionary</li>
 <li>we fished out the value for the <code>name</code> key from the dictionary</li>
 </ul>
-<h2 id="json-structure-and-nesting">JSON structure and nesting</h2>
+<h2 id="json-structure">JSON structure</h2>
 <p>We learned previously how JSON is made up of the following structures:  </p>
 <ul>
 <li><strong>JSON objects</strong>, which get converted to <strong>Python dictionaries</strong></li>

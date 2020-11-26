@@ -3,7 +3,7 @@
 </div>
 # Getting data with `requests`
 
-## Undertanding the API structure
+## API endpoints
 
 Our first port of call should be the [documentation](https://developer.spotify.com/documentation/web-api/reference/) - take a look around the sections in the **API Endpoint Reference**.
 
@@ -87,7 +87,7 @@ print(list(data.keys()), '\n\n', data['name'])
 - we took a look at the `list` of `.keys()` in the resulting dictionary
 - we fished out the value for the `name` key from the dictionary
 
-## JSON structure and nesting
+## JSON structure
 
 We learned previously how JSON is made up of the following structures:  
 
