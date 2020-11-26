@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Authentication - MixTape - Tutorial</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/docco.min.css">
+        <link href="../extra.css" rel="stylesheet">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">MixTape - Tutorial</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Overview</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tutorial <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../web-apis-intro/" class="dropdown-item">Intro to Web APIs</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Authentication</a>
+</li>
+                                    
+<li>
+    <a href="../requests-get-data/" class="dropdown-item">Getting Data</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a rel="prev" href="../web-apis-intro/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../requests-get-data/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#authorization" class="nav-link">Authorization</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#code-walkthrough" class="nav-link">Code walkthrough</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#json-data-structures" class="nav-link">JSON data structures</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<div class="content-links">
+<a target="_blank" href="../requests-auth-slides.html" class="btn btn-outline-secondary">Slideshow</a>
+</div>
+<h1>Accessing web APIs with <code>requests</code></h1>
+<h2 id="authorization">Authorization</h2>
+<p>Most APIs require users to <strong>identify</strong> themselves, and have <strong>limits on the volume and frequency of requests</strong> each user can make, in order to:</p>
+<ul>
+<li>prevent excessive or malicious use overloading the server</li>
+<li>ensure the API remains available for genuine users</li>
+</ul>
+<p>This typically requires users to register, upon which they're provided with <strong>credentials</strong>, typically in the form of a unique <code>id</code> and an accompanying <code>key</code> or <code>secret</code>.</p>
+<h3 id="obtaining-spotify-api-credentials">Obtaining Spotify API credentials</h3>
+<p>We'll be using the <strong>Spotify API</strong> throughout the tutorial. In order to use it, you'll need a Spotify account. </p>
+<p><a href="https://developer.spotify.com/dashboard/">Log in or sign up (free)</a></p>
+<p>Follow <code>CREATE AN APP</code> from the Dashboard, then copy your <code>Client ID</code> and <code>Client Secret</code> to somewhere handy. </p>
+<p><img alt="dashboard" src="../images/dashboard.png" /></p>
+<h3 id="authentication">Authentication</h3>
+<p>In addition to the <code>id</code> and <code>secret</code> we've just gathered, Spotify requires us to <strong>authenticate</strong> prior to requesting data. </p>
+<p>There are several options available; we'll be using the <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">Client Credentials Flow</a>. This will give us access to masses of data about the contents of the Spotify catalogue, but without access to personalized information such as user playlists.</p>
+<p>We'll send the <code>id</code> and <code>secret</code>to the API using a <code>POST</code> request, and be sent an <code>access_token</code> in the response.</p>
+<h3 id="obtaining-an-api-access_token">Obtaining an API <code>access_token</code></h3>
+<p>The <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">documentation</a> tells us that we'll need to:</p>
+<ul>
+<li>send a <code>POST</code> request to <code>https://accounts.spotify.com/api/token</code></li>
+<li>include <code>'grant_type': 'client_credentials'</code> in the request <strong>body</strong></li>
+<li>include <code>'Authorization' : 'Basic [base64 encoded client_id:client_secret]'</code> in the <strong>header</strong></li>
+</ul>
+<p>Fortunately, the <code>requests.post()</code> and <code>HTTPBasicAuth</code> functions will simplify this for us.</p>
+<h3 id="replit-code-snippet">repl.it code snippet</h3>
+<p>First of all, <a href="https://repl.it/@datadesigns/seeder-requests-auth">fork the repl</a>. You'll see a file called <code>.env.example</code>; replace the credentials with your own, and change the filename to <code>.env</code></p>
+<ul>
+<li><em><code>.env</code> files aren't shared when a fork of a repl is made; they allow you to store values you don't want to share</em></li>
+</ul>
+<p><code>main.py</code> will be executed when you hit <code>Run</code>. If all is well, you should see a dictionary printed in the console below.</p>
+<iframe height="800px" width="100%" src="https://repl.it/@datadesigns/seeder-requests-auth?lite=false" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+
+<h2 id="code-walkthrough">Code walkthrough</h2>
+<p>Let's go through <code>main.py</code> and see what happened...</p>
+<h3 id="accessing-our-credentials">Accessing our credentials</h3>
+<pre><code class="language-python">import requests
+from requests.auth import HTTPBasicAuth
+import os
+
+client_id = os.getenv(&quot;CLIENT_ID&quot;)
+client_secret = os.getenv(&quot;CLIENT_SECRET&quot;)
+</code></pre>
+<ul>
+<li>we imported the <code>requests</code> and <code>os</code> packages, and the <code>HTTPBasicAuth</code> submodule</li>
+<li>we used the <code>.getenv()</code> method to collect our credentials from the <code>.env</code> file</li>
+</ul>
+<h3 id="defining-components-for-the-request">Defining components for the request</h3>
+<p>We can use the Python <code>help()</code> function to see the docstring for <code>requests.post()</code>:</p>
+<pre><code class="language-python">help(requests.post)
+</code></pre>
+<pre><code>Help on function post in module requests.api:
+
+post(url, data=None, json=None, **kwargs)
+    Sends a POST request.
+
+    :param url: URL for the new :class:`Request` object.
+    :param data: (optional) Dictionary, list of tuples, bytes, or file-like
+        object to send in the body of the :class:`Request`.
+    :param json: (optional) json data to send in the body of the :class:`Request`.
+    :param \*\*kwargs: Optional arguments that ``request`` takes.
+    :return: :class:`Response &lt;Response&gt;` object
+    :rtype: requests.Response
+</code></pre>
+<pre><code class="language-python">url = 'https://accounts.spotify.com/api/token'
+data = {'grant_type': 'client_credentials'}
+auth=HTTPBasicAuth(client_id, client_secret)
+</code></pre>
+<ul>
+<li>our <code>url</code> is the one given by the API documentation</li>
+<li><code>data</code> is the <code>parameter:value</code> pair required to be in the body</li>
+<li><code>auth</code> is an optional <strong>keyword argument</strong></li>
+<li>the <code>HTTPBasicAuth</code> method has done the required <strong>encoding</strong> and <strong>formatting</strong> of the credentials for us</li>
+</ul>
+<h3 id="making-a-post-request">Making a <code>POST</code> request</h3>
+<pre><code class="language-python">response = requests.post(url, data=data, auth=auth)
+response.ok
+</code></pre>
+<ul>
+<li>
+<p>we used the <code>.post()</code> method of <code>requests</code> with the arguments we had defined, assigning the returned object to <code>response</code></p>
+</li>
+<li>
+<p>the <code>.ok</code> attribute of the <code>Response</code> object is <code>True</code>, meaning that the response was successful</p>
+</li>
+</ul>
+<h3 id="accessing-response-data">Accessing response data</h3>
+<pre><code class="language-python">response.json()
+</code></pre>
+<pre class="nb-output"><code class="language-python">    {'access_token': 'BQA5XobojGmQ22qGfcf1XSX1xTJD6pH6oeltC5HtX5fML8ps_uDp1U74ybc5M45CmmRf8DX8FAFjOivOae4',
+     'token_type': 'Bearer',
+     'expires_in': 3600,
+     'scope': ''}
+</code></pre>
+<ul>
+<li>the <code>.json()</code> method of the <code>response</code> object returned by the API converts the included <strong>JSON object</strong> into a Python dictionary</li>
+<li>the <code>key:value</code> pairs include the <code>access_token</code> we need</li>
+<li>also note the <code>expires_in</code> value - this is the time in seconds (i.e. one hour) that the token will remain usable for</li>
+</ul>
+<h3 id="status-codes">Status codes</h3>
+<pre><code class="language-python">response.status_code
+</code></pre>
+<pre class="nb-output"><code class="language-python">    200
+</code></pre>
+<p>The <code>.status_code</code> attribute indicates whether the request was successful, and if not, what went wrong.</p>
+<ul>
+<li>in short, <code>200</code> is good news, as is anything in the <code>200</code>s </li>
+<li>codes in the <code>400</code>s typcially indicate an issue with your code or parameters</li>
+<li>codes in the <code>500</code>s indicate something is malfunctioning on the server</li>
+</ul>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">More about response codes</a></p>
+<h2 id="json-data-structures">JSON data structures</h2>
+<p>JSON (<strong>JavaScript Object Notation</strong>) is the most popular data format used by web APIs.</p>
+<p>Fortunately for Python programmers, it is fairly straightforward to map JSON to equivalent Python data structures, data types and values (and as shown above, modules which can do this for us).</p>
+<ul>
+<li><strong>JSON objects</strong> are much like <strong>Python dictionaries</strong>, with comma-separated <code>key:value</code> pairs inside <code>{</code> braces <code>}</code></li>
+<li><strong>JSON arrays</strong> are much like <strong>Python lists</strong>, with an ordered collection of comma-separated values inside <code>[</code> brackets <code>]</code></li>
+</ul>
+<p>The JSON values <code>true</code>, <code>false</code> and <code>null</code> are equivalent to the Python values <code>True</code>, <code>False</code> and <code>None</code> respectively</p>
+<p><a href="https://www.json.org/json-en.html">More about JSON</a></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+
+        <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

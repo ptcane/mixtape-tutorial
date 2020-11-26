@@ -1,0 +1,16 @@
+[tool.poetry]
+
+name = "MixTape"
+version = "0.1"
+description = "MixTape Tutorial"
+license = "MIT"
+
+authors = ["Paul Cane"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+
+python = "^3.8"
+mkdocs = "^1.1.2"
+mkdocs-bootswatch = "^1.1"
+nbconvert = "^5.5.0"

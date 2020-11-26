@@ -1,0 +1,65 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap');
+
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+code {
+    font-family: 'Oxygen Mono', monospace;
+}
+
+div.content-links {
+    text-align: right;
+    padding-bottom: 0.5em;
+}
+
+h2, h3, h4, h5, h6 {
+ 
+  font-family: 'Source Sans Pro', sans-serif;
+  
+}
+
+h1 {font-size: 2.5rem}
+h2 {font-size: 2rem}
+h3 {font-size: 1.5rem}
+h4 {font-size: 1.25rem}
+h5 {font-size: 1rem}
+h6 {font-size: 1rem}
+
+
+strong{color: var(--info);}
+
+h2, h3 {
+    border-top: 1px solid var(--light);
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+h4 {
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+pre.nb-output {
+    background-color: transparent;
+}
+
+a.navbar-brand {
+    font-family: 'Rock Salt', cursive;
+}
+
+blockquote > p {
+    padding-left: 2rem;
+    color: var(--info);
+
+}
+
+ul {
+  line-height: 200%;
+}

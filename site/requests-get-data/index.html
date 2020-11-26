@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Getting Data - MixTape - Tutorial</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/docco.min.css">
+        <link href="../extra.css" rel="stylesheet">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">MixTape - Tutorial</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Overview</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tutorial <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../web-apis-intro/" class="dropdown-item">Intro to Web APIs</a>
+</li>
+                                    
+<li>
+    <a href="../requests-auth/" class="dropdown-item">Authentication</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Getting Data</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a rel="prev" href="../requests-auth/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#undertanding-the-api-structure" class="nav-link">Undertanding the API structure</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#using-requestsget" class="nav-link">Using requests.get()</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#code-walkthrough" class="nav-link">Code walkthrough</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#json-structure-and-nesting" class="nav-link">JSON structure and nesting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#using-query-parameters" class="nav-link">Using query parameters</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#your-turn" class="nav-link">Your turn...</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<div class="content-links">
+<a target="_blank" href="../requests-get-data-slides.html" class="btn btn-outline-secondary">Slideshow</a>
+</div>
+<h1>Getting data with <code>requests</code></h1>
+<h2 id="undertanding-the-api-structure">Undertanding the API structure</h2>
+<p>Our first port of call should be the <a href="https://developer.spotify.com/documentation/web-api/reference/">documentation</a> - take a look around the sections in the <strong>API Endpoint Reference</strong>.</p>
+<p>You'll discover:</p>
+<ul>
+<li>the <code>base_url</code> for the API is <code>https://api.spotify.com/v1</code></li>
+<li>
+<p>various endpoints which accept <code>GET</code> requests, such as:</p>
+<p><code>https://api.spotify.com/v1/recommendations</code><br />
+<code>https://api.spotify.com/v1/artists/{id}</code></p>
+</li>
+</ul>
+<p>Looking at the detailed page of each of these endpoints, you'll see a list of the <strong>query parameters</strong> that can (or are required) be provided, as well as the need for authorization details to be provided in the <strong>header</strong>.</p>
+<p>Again, <code>requests</code> will simplify this process for us.</p>
+<h2 id="using-requestsget">Using <code>requests.get()</code></h2>
+<p>We previously covered how REST APIs typically support <code>GET</code> requests, which can be used to <strong>retrieve data</strong> from the API.</p>
+<h3 id="replit-code-snippet">repl.it code snippet</h3>
+<p>Fork the <a href="https://repl.it/@datadesigns/seeder-requests-get-data">repl</a> and <strong>copy your <code>access_token</code> into <code>auth.py</code></strong> (you'll need to create a new one if it's more than an hour old).</p>
+<iframe height="800px" width="100%" src="https://repl.it/@datadesigns/seeder-requests-get-data?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+
+<h2 id="code-walkthrough">Code walkthrough</h2>
+<p>Let's go through <code>main.py</code> and see what happened...</p>
+<h3 id="authorization-headers">Authorization headers</h3>
+<pre><code class="language-python">import requests
+
+#replace this with your current client_credentials access_token:
+access_token = 'BQCHXEgma0DJzRDlxTeuGYnqT9cdUaW93bC3Nq90adobVSWMDjjcN40n5ZQ0EmYHPVePzp6TJPb3Svvyg24' 
+
+headers = {'Authorization': f'Bearer {access_token}'}
+</code></pre>
+<ul>
+<li>we imported <code>requests</code> and assigned our token to <code>access_token</code></li>
+<li>we created a <code>headers</code> dictionary, with this <code>parameter:value</code> pair:<br />
+<code>Authorization: Bearer [access_token]</code></li>
+</ul>
+<p><em>Notice that we had to do some work to get the value in the format the API requires (with <code>Bearer</code> before the <code>access_token</code>); this is mentioned in the <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">API documentation</a> but wasn't clear to me before Google came to the rescue.</em></p>
+<h3 id="url-components">URL components</h3>
+<pre><code class="language-python">base_url = 'https://api.spotify.com/v1'
+endpoint = '/albums/'
+identifier = '1To7kv722A8SpZF789MZy7'
+full_url = f'{base_url}{endpoint}{identifier}'
+</code></pre>
+<ul>
+<li>
+<p>the URL is in component parts and combined using an f-string; this will allow us to make further requests to different endpoints more easily</p>
+</li>
+<li>
+<p>the value assigned to <code>identifier</code> is an <code>album_id</code>; these can be found at the end of the URL of any album page on the <a href="https://open.spotify.com/">Spotify Web Player</a></p>
+</li>
+</ul>
+<h3 id="response-data">Response data</h3>
+<pre><code class="language-python">response = requests.get(full_url, headers=headers)
+data = response.json()
+
+print(list(data.keys()), '\n')
+print(data['name'])
+</code></pre>
+<pre><code>['album_type', 'artists', 'available_markets', 'copyrights', 'external_ids', 'external_urls', 'genres', 'href', 'id', 'images', 'label', 'name', 'popularity', 'release_date', 'release_date_precision', 'total_tracks', 'tracks', 'type', 'uri']
+
+MTV Unplugged In New York
+</code></pre>
+<ul>
+<li>we used the <code>.json()</code> method on the <code>Response</code> object to convert the JSON data into equivalent Python data stuctures</li>
+<li>we took a look at the <code>list</code> of <code>.keys()</code> in the resulting dictionary</li>
+<li>we fished out the value for the <code>name</code> key from the dictionary</li>
+</ul>
+<h2 id="json-structure-and-nesting">JSON structure and nesting</h2>
+<p>We learned previously how JSON is made up of the following structures:  </p>
+<ul>
+<li><strong>JSON objects</strong>, which get converted to <strong>Python dictionaries</strong></li>
+<li><strong>JSON arrays</strong>, which get converted to <strong>Python lists</strong></li>
+</ul>
+<p>JSON datasets are often heavily <strong>nested</strong>; by this it's meant that we can expect to encounter instances of these data structures <em>within</em> others.</p>
+<h3 id="example-of-json-structure">Example of JSON structure</h3>
+<pre><code class="language-python">data['artists']
+</code></pre>
+<pre class="nb-output"><code class="language-python">    [{'external_urls': {'spotify': 'https://open.spotify.com/artist/6olE6TJLqED3rqDCT0FyPh'},
+      'href': 'https://api.spotify.com/v1/artists/6olE6TJLqED3rqDCT0FyPh',
+      'id': '6olE6TJLqED3rqDCT0FyPh',
+      'name': 'Nirvana',
+      'type': 'artist',
+      'uri': 'spotify:artist:6olE6TJLqED3rqDCT0FyPh'}]
+</code></pre>
+<pre><code class="language-python">data['artists'][0]['name']
+</code></pre>
+<pre class="nb-output"><code class="language-python">    Nirvana
+</code></pre>
+<ul>
+<li>the value associated with the <code>data</code> key is itself a list of dictionaries (in this case there is only one element in the list, but the structure means that several artists could be accomodated) </li>
+</ul>
+<pre><code class="language-python">print(data['artists'][0]['external_urls']['spotify'])
+</code></pre>
+<pre class="nb-output"><code class="language-python">    https://open.spotify.com/artist/6olE6TJLqED3rqDCT0FyPh
+</code></pre>
+<ul>
+<li>to extract the Spotify URL we are getting a value from a dictionary, which is itself a value in another dictionary, which is itself an element in a list, which is itself a value in another dictionary. Phew!</li>
+</ul>
+<p>We'll be looking later on at how we can better access nested data returned by our API requests.</p>
+<h3 id="the-replit-console">The repl.it console</h3>
+<p>After running the <code>repl</code> you forked earlier, you can access the <code>data</code> dictionary via the console:</p>
+<p><img alt="replit console" src="../images/replit-console.png" /></p>
+<ul>
+<li>after running <code>main.py</code>, the <code>data</code> dictionary (and anything else imported or created) is in memory</li>
+<li>as a Python <code>repl</code>, the Python <strong>interpreter</strong> is already running, and we can enter Python commands</li>
+</ul>
+<h2 id="using-query-parameters">Using query parameters</h2>
+<p>With our request for data relating to a particular album, the URL itself (with the <code>{id}</code> at the end of the endpoint) was sufficient to specify what data we were requesting.</p>
+<p>However, we often need to be more specific, and it it's often more appropariate for the API to be structured to deal with such requests through the use of <strong>query parameters</strong>.</p>
+<p>Again, fear not - <code>requests</code> is here to make life easier for us.</p>
+<h3 id="example-with-query-parameters">Example with query parameters</h3>
+<p>Take a look at the API documentation for <a href="https://developer.spotify.com/documentation/web-api/reference/search/search/">Search</a>. </p>
+<p>You'll notice that values for the <code>q</code> (short for 'query') and <code>type</code> parameters are <em>required</em> - our request will fail if we don't provide them.</p>
+<pre><code class="language-python">params = {'q': 'waterfall', 'type': 'track'}
+search_endpoint = '/search'
+search_url = f'{base_url}{search_endpoint}'
+search_response = requests.get(search_url, headers=headers, params=params)
+</code></pre>
+<ul>
+<li>we assigned a dictionary containing the <code>parameter:value</code> pairs to <code>params</code></li>
+<li>we used the <code>/search</code> endpoint with the <code>base_url</code> we defined previously</li>
+<li>we used our <code>params</code> dictionary as the <code>params</code> argument in the <code>GET</code> request</li>
+</ul>
+<pre><code class="language-python">waterfall_tracks = search_response.json()
+print(list(waterfall_tracks.keys()))
+print(list(waterfall_tracks['tracks'].keys()))
+print(list(waterfall_tracks['tracks']['items'][0].keys()))
+</code></pre>
+<pre class="nb-output"><code class="language-python">    ['tracks']
+    ['href', 'items', 'limit', 'next', 'offset', 'previous', 'total']
+    ['album', 'artists', 'available_markets', 'disc_number', 'duration_ms', 'explicit', 'external_ids', 'external_urls', 'href', 'id', 'is_local', 'name', 'popularity', 'preview_url', 'track_number', 'type', 'uri']
+</code></pre>
+<p>Again, we see that the returned data structure has a lot of nesting.</p>
+<ul>
+<li>the top-level dictionary has only one key; perhaps at some stage, <code>type</code> wasn't a required value and so the returned dataset could also have contained albums, artists, etc</li>
+<li>the keys in the next level relate to the search itself, including data on relevant tracks<ul>
+<li>the <code>items</code> value is a list of dictionaries, each containing data about a given track</li>
+</ul>
+</li>
+<li>each item in this list is a dictionary, some of whose values are also data structures </li>
+</ul>
+<h3 id="result-and-rate-limits-on-api-requests">Result and rate limits on API requests</h3>
+<p>APIs will not typically return all items if there are a large number of matches; instead, further calls to the API will be required. You may also encounter limits on the <strong>frequency</strong> or <strong>volume</strong> of requests to an API or particular endpoint.</p>
+<pre><code class="language-python">print(waterfall_tracks['tracks']['total'])
+print(waterfall_tracks['tracks']['limit'])
+print(waterfall_tracks['tracks']['next'])
+</code></pre>
+<pre class="nb-output"><code class="language-python">    97307
+    20
+    https://api.spotify.com/v1/search?query=waterfall&amp;type=track&amp;offset=20&amp;limit=20
+</code></pre>
+<ul>
+<li>given the total number of results, we can see why there is a limit rather than returning all of them :)</li>
+<li>the Spotify API conveniently provides us with an endpoint for the next block of tracks</li>
+</ul>
+<h2 id="your-turn">Your turn...</h2>
+<p>Spend some time using  <code>requests.get()</code> to fetch data from endpoints listed under <code>Albums</code>, <code>Artists</code>, <code>Browse</code>, <code>Search</code>, and <code>Tracks</code> in the <a href="https://developer.spotify.com/documentation/web-api/reference/">documentation</a>; all of these can be done using the Client Credentials <code>access_token</code> you created earlier.</p>
+<p>See if you can create some reuable functions, to do things such as:</p>
+<ul>
+<li>fetching data for a given track, using an <code>access_token</code> and a track <code>id</code> as arguments</li>
+<li>searching for artists, using an <code>access_token</code> and a string of keywords as arguments</li>
+</ul>
+<p>For now, don't worry about automatically renewing the <code>access_token</code> or diving too deep into the nested data - we'll be looking at that later on.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+
+        <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

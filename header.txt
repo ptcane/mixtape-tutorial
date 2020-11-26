@@ -1,0 +1,3 @@
+<div class="content-links">
+<a target="_blank" href="xxSLIDES_URLxx" class="btn btn-outline-secondary">Slideshow</a>
+</div>

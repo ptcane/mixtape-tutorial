@@ -1,0 +1,19 @@
+site_name: MixTape - Tutorial
+theme: 
+    name: bootswatch
+    name: flatly
+nav: 
+  - Overview: 'index.md'
+  - Tutorial: 
+    - Intro to Web APIs: 'web-apis-intro.md'
+    - Authentication: 'requests-auth.md'
+    - Getting Data: 'requests-get-data.md'
+  
+
+markdown_extensions:
+  - toc:
+        toc_depth: 2-6
+  - admonition
+
+plugins: []
+extra_css: [extra.css]
