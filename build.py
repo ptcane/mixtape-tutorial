@@ -34,7 +34,7 @@ suffix_offset = 0
 max_matches = None
 start_index = 0
 
-tr_pp = TagRemovePreprocessor(remove_cell_tags=['remove'], remove_input_tags = ['remove-input'])
+tr_pp = TagRemovePreprocessor(remove_cell_tags=['remove'], remove_input_tags=['remove-input'])
 md_exp = MarkdownExporter(preprocessors=[tr_pp])
 
 for nb in md_nbs:
@@ -85,7 +85,7 @@ for nb in md_nbs:
 
 
 #Slides
-rv_exp = SlidesExporter(reveal_theme='white')
+rv_exp = SlidesExporter(reveal_theme='white', preprocessors=[tr_pp])
 
 for nb in rv_nbs:
     nb_name = nb.rsplit('/')[1].split('.')[0]
