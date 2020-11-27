@@ -8,6 +8,7 @@ nav:
     - Intro to Web APIs: 'web-apis-intro.md'
     - Authentication: 'requests-auth.md'
     - Getting Data: 'requests-get-data.md'
+    - Replit Database: 'replit-database.md'
   
 
 markdown_extensions:

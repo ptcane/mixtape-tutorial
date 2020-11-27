@@ -52,6 +52,10 @@
 <li>
     <a href="./" class="dropdown-item active">Getting Data</a>
 </li>
+                                    
+<li>
+    <a href="../replit-database/" class="dropdown-item">Replit Database</a>
+</li>
                                 </ul>
                             </li>
                         </ul>
@@ -63,7 +67,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../replit-database/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -159,7 +163,12 @@ full_url = f'{base_url}{endpoint}{identifier}'
 <p>the URL is in component parts and combined using an f-string; this will allow us to make further requests to different endpoints more easily</p>
 </li>
 <li>
-<p>the value assigned to <code>identifier</code> is an <code>album_id</code>; these can be found at the end of the URL of any album page on the <a href="https://open.spotify.com/">Spotify Web Player</a></p>
+<p>the <code>identifier</code> value is a <code>track_id</code>; you can get these from the  <a href="https://open.spotify.com/">Spotify Web Player</a>:  </p>
+<ul>
+<li>right-click on any <strong>song title</strong></li>
+<li>click <code>Share</code> then <code>Copy Song Link</code></li>
+<li>the <code>track_id</code> is the final part of the URL</li>
+</ul>
 </li>
 </ul>
 <h3 id="response-data">Response data</h3>
