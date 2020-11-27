@@ -163,5 +163,3 @@ response.status_code
 # - **JSON arrays** are much like **Python lists**, with an ordered collection of comma-separated values inside `[` brackets `]`
 #
 # The JSON values `true`, `false` and `null` are equivalent to the Python values `True`, `False` and `None` respectively.
-#
-# [More about JSON](https://www.json.org/json-en.html)
