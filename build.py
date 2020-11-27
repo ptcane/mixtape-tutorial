@@ -1,7 +1,8 @@
 # TODO
 
 # replace ```<language> with ```<magic> and remove magics
-
+import shutil
+import os
 from nbconvert import MarkdownExporter, SlidesExporter
 from nbconvert.preprocessors import TagRemovePreprocessor
 import re
@@ -14,6 +15,15 @@ rv_exclusions = ['notebooks/pop-quiz.ipynb']
 md_nbs = [nb for nb in nbs if nb not in md_exclusions]
 rv_nbs = [nb for nb in nbs if nb not in rv_exclusions]
 
+# #copy images folder
+
+source_dir = 'notebooks/images/'
+target_dir = 'docs/images/'
+file_names = os.listdir(source_dir)
+
+for file_name in file_names:
+    shutil.copy(os.path.join(source_dir, file_name), target_dir)
+# 
 
 #markdown
 regex = re.compile(r"```(\n)+((\ {4,}?.+(\n+))+)\n")
@@ -79,7 +89,7 @@ rv_exp = SlidesExporter(reveal_theme='white')
 
 for nb in rv_nbs:
     nb_name = nb.rsplit('/')[1].split('.')[0]
-    slides_dests = [f'docs/{nb_name}-slides.html', f'notebooks/{nb_name}-slides.html']
+    slides_dests = [f'docs/{nb_name}-slides.html']
 
     text, resources = rv_exp.from_file(nb)
 
@@ -87,3 +97,4 @@ for nb in rv_nbs:
 
         with open(dest, 'a') as f:
             f.write(text)
+            print(f'{dest} created.')

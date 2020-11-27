@@ -66,7 +66,11 @@ full_url = f'{base_url}{endpoint}{identifier}'
 
 - the URL is in component parts and combined using an f-string; this will allow us to make further requests to different endpoints more easily
 
-- the value assigned to `identifier` is an `album_id`; these can be found at the end of the URL of any album page on the [Spotify Web Player](https://open.spotify.com/)
+- the `identifier` value is a `track_id`; you can get these from the  [Spotify Web Player](https://open.spotify.com/):  
+
+    - right-click on any **song title**
+    - click `Share` then `Copy Song Link`
+    - the `track_id` is the final part of the URL
 
 ### Response data
 

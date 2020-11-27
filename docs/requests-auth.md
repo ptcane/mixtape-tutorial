@@ -137,7 +137,7 @@ response.json()
 ```
 
 - the `.json()` method of the `response` object returned by the API converts the included **JSON object** into a Python dictionary
-- the `key:value` pairs include the `access_token` we need
+- the `key:value` pairs include the `access_token` we need; highlight and right-click it to copy (usual shortcuts don't work in the console)
 - also note the `expires_in` value - this is the time in seconds (i.e. one hour) that the token will remain usable for
 
 ### Status codes
@@ -168,6 +168,4 @@ Fortunately for Python programmers, it is fairly straightforward to map JSON to 
 - **JSON objects** are much like **Python dictionaries**, with comma-separated `key:value` pairs inside `{` braces `}`
 - **JSON arrays** are much like **Python lists**, with an ordered collection of comma-separated values inside `[` brackets `]`
 
-The JSON values `true`, `false` and `null` are equivalent to the Python values `True`, `False` and `None` respectively
-
-[More about JSON](https://www.json.org/json-en.html)
+The JSON values `true`, `false` and `null` are equivalent to the Python values `True`, `False` and `None` respectively.
