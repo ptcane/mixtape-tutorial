@@ -126,7 +126,7 @@ for i in range(5):
 
 - we've set `site_name` to a string, which we'll use in our web page
 - we've used `requests.get()` as seen previously to collect data from an API
- - in this case, the [Bored API](www.boredapi.com), which doesn't require credentials
+ - in this case, the [Bored API](https://www.boredapi.com), which doesn't require credentials
 - `activities` now has a list of dictionaries containing data for our page
 
 ```python
