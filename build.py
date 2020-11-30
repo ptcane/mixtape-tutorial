@@ -19,7 +19,7 @@ rv_nbs = [nb for nb in nbs if nb not in rv_exclusions]
 
 tr_pp = TagRemovePreprocessor(remove_cell_tags=['remove'], remove_input_tags=['remove-input'])
 md_exp = MarkdownExporter(preprocessors=[tr_pp])
-rv_exp = SlidesExporter(reveal_theme='white', reveal_scroll=True, reveal_url_prefix= "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js", preprocessors=[tr_pp])
+rv_exp = SlidesExporter(exclude_input_prompt=True, reveal_theme='white', reveal_scroll=True, preprocessors=[tr_pp])
 
 for nb in rv_nbs:
     nb_name = nb.rsplit(r'/')[1].split('.')[0]
@@ -108,7 +108,7 @@ for nb in md_nbs:
 for nb in rv_nbs:
     
     text, resources = rv_exp.from_file(nb)
-    time.sleep(5)
+    #time.sleep(3)
     nb_name = nb.rsplit(r'/')[1].split('.')[0]
     slides_dest = f'docs/{nb_name}-slides.html'
 
