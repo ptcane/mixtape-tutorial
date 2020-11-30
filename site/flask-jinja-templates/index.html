@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Flask Web Apps - MixTape - Tutorial</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/docco.min.css">
+        <link href="../extra.css" rel="stylesheet">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">MixTape - Tutorial</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Overview</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tutorial <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../web-apis-intro/" class="dropdown-item">Intro to Web APIs</a>
+</li>
+                                    
+<li>
+    <a href="../requests-auth/" class="dropdown-item">Authentication</a>
+</li>
+                                    
+<li>
+    <a href="../requests-get-data/" class="dropdown-item">Getting Data</a>
+</li>
+                                    
+<li>
+    <a href="../replit-database/" class="dropdown-item">Replit Database</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Flask Web Apps</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a rel="prev" href="../replit-database/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="2"><a href="#flask-web-framework" class="nav-link">Flask web framework</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#jinja-templates" class="nav-link">Jinja templates</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#flask-jinja-templates" class="nav-link">Flask &amp; Jinja templates</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<div class="content-links">
+<a target="_blank" href="../flask-jinja-templates-slides.html" class="btn btn-outline-secondary">Slideshow</a>
+</div>
+<h1>Flask Web Apps</h1>
+<h2 id="flask-web-framework">Flask web framework</h2>
+<p><code>flask</code> is a Python package which can help you to:</p>
+<ul>
+<li>quickly create dynamic web applications</li>
+<li>add functionality with many extensions available</li>
+<li>scale up in complexity when required</li>
+</ul>
+<p>It is a <strong>lightweight web application framework</strong> which is popular, flexible, and easy to get started with.</p>
+<h3 id="hello-world-example">'Hello, World' example</h3>
+<p>Take a look at <a href="https://repl.it/@datadesigns/mixtape-flask-hello-world">this repl</a> to see how we can serve a web page with Flask:</p>
+<iframe height="600px" width="100%" src="https://repl.it/@datadesigns/mixtape-flask-hello-world?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+
+<pre><code class="language-python">from flask import Flask
+app = Flask(__name__)
+</code></pre>
+<ul>
+<li>we imported the <code>Flask</code> class definition, and assigned an instance of it to <code>app</code></li>
+</ul>
+<p>Things we don't need to worry about for now, but:</p>
+<ul>
+<li><code>__name__</code>is a special Python variable which determines where Flask should look for files such as templates</li>
+<li><code>__main__</code> will be the value of <code>__name__</code> if this file is itself being run directly rather than by another file</li>
+</ul>
+<pre><code class="language-python">@app.route('/')
+</code></pre>
+<ul>
+<li>this is a  <strong>decorator</strong>, which acts as a '<strong>wrapper</strong>' around the subsequent function</li>
+<li>in short this tells Flask to use the function to determine what will be shown at the 'root URL', i.e. mysite.com<strong><code>/</code></strong></li>
+</ul>
+<pre><code class="language-python">def index():
+    return 'Hello, World'
+</code></pre>
+<ul>
+<li>our function returns some text, which is shown on the web page</li>
+<li>it could be called anything, but usually <code>index</code> is used for the root URL</li>
+</ul>
+<pre><code class="language-python">if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True)
+</code></pre>
+<ul>
+<li><code>__name__</code> will equal <code>__main__</code> because we are running the file directly (unimportant for now)</li>
+<li>the <code>.run()</code> method of <code>app</code> will serve the page at the given <code>host</code> (required for replit)</li>
+<li><code>debug=True</code> means we can see changes in the page without running the code again</li>
+</ul>
+<p><em>Try changing the 'Hello, World' text and refreshing the page.</em></p>
+<h2 id="jinja-templates">Jinja templates</h2>
+<p><code>jinja</code> is a Python package which is used for <strong>templating</strong>. We can use it to:</p>
+<ul>
+<li>create reusable structures for web pages (such as the header and footer)</li>
+<li>combine blocks of content into a single document or web page</li>
+<li>conditionally include elements or specific data based on user inputs</li>
+</ul>
+<p>The <strong>syntax</strong> used in Jinja templates is <strong>similar to Python</strong>.</p>
+<h3 id="jinja-syntax-example">Jinja syntax example</h3>
+<p>This code snippet is taken from the example we'll see later, showing a part of the template where rows in a template are created based on data in a list of dictionaries:</p>
+<pre><code class="language-html">    {% for activity in activities %}
+    &lt;tr&gt;
+      &lt;th scope=&quot;row&quot;&gt;{{ loop.index }}&lt;/th&gt;
+      &lt;td&gt;{{ activity['activity'] }}&lt;/td&gt;
+      &lt;td&gt;{{ activity['price'] }}&lt;/td&gt;
+    &lt;/tr&gt;
+    {% endfor %}
+
+</code></pre>
+<ul>
+<li>we can see <strong>statements</strong> within <code>{% ... %}</code> tags (here designating a <code>for</code> loop)</li>
+<li>we can see <strong>expressions</strong> within <code>{{ ... }}</code> tags (here looking up values in a dictionary)</li>
+</ul>
+<h2 id="flask-jinja-templates">Flask &amp; Jinja templates</h2>
+<p>Rather than our page function to simply return text, we can use the <code>flask.render_template()</code> function to:</p>
+<ul>
+<li>return a jinja template instead to be displayed (which itself may incorporate other templates)</li>
+<li>pass Python data structures to be used by that template (such as lists and dictionaries)</li>
+</ul>
+<p>This is a powerful combination which is central to making our web pages <strong>dynamic</strong>.</p>
+<h3 id="code-walkthrough-flask">Code walkthrough - Flask</h3>
+<p>Here's a Flask example which uses Jinja templating, including the code we've just seen:  </p>
+<p><a href="https://repl.it/@datadesigns/mixtape-flask-jinja#main.py">fork the repl</a></p>
+<iframe height="900px" width="100%" src="https://repl.it/@datadesigns/mixtape-flask-jinja?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+
+<pre><code class="language-python">site_name = 'Bucket List'
+activities = []
+
+for i in range(5):
+    resp = requests.get('https://www.boredapi.com/api/activity?type=recreational')
+    activities.append(resp.json())
+</code></pre>
+<ul>
+<li>we've set <code>site_name</code> to a string, which we'll use in our web page</li>
+<li>we've used <code>requests.get()</code> as seen previously to collect data from an API</li>
+<li>in this case, the <a href="www.boredapi.com">Bored API</a>, which doesn't require credentials</li>
+<li><code>activities</code> now has a list of dictionaries containing data for our page</li>
+</ul>
+<pre><code class="language-python">@app.route('/')
+def index():
+
+    return render_template('index.html', site_name=site_name, activities=activities)
+</code></pre>
+<ul>
+<li>we've called the <code>render_template()</code> function, giving our template file as the first argument, followed by two <strong>keyword arguments</strong> containing our data to be used by the template  </li>
+<li>the variable names used in the Python logic are typically (but don't have to be) the same as those used in the Jinja templates</li>
+</ul>
+<h3 id="code-walkthrough-jinja-templates">Code walkthrough - Jinja templates</h3>
+<p>Take a look at <code>base.html</code>:</p>
+<pre><code class="language-html">&lt;title&gt;{{ site_name }}&lt;/title&gt;
+</code></pre>
+<pre><code class="language-html">&lt;body&gt;    
+    {% block content %}
+    {% endblock %}
+&lt;/body&gt;
+</code></pre>
+<ul>
+<li>the value passed for <code>site_name</code> will be used as the <code>title</code> (shown in the browser tab)</li>
+<li>any templates which <strong>extend</strong> this template can insert a <strong>block</strong> labelled <code>content</code> in the given location
+_</li>
+</ul>
+<p>The rest of <code>base.html</code> is simply a '<strong>boilerplate</strong>' or 'blank canvas' for using the <strong>Bootstrap</strong> CSS framework:</p>
+<ul>
+<li>the <strong>viewport</strong> metadata ensures the page will be <strong>responsive</strong></li>
+<li>the Bootstrap CSS is imported from a <strong>CDN</strong> (Content Delivery Network)</li>
+</ul>
+<h3 id="blocks-and-extensions">Blocks and extensions</h3>
+<p>Take a look at <code>index.html</code>:</p>
+<pre><code class="language-html">{% extends &quot;base.html&quot; %}
+{% block content %}
+...
+{% endblock %}
+</code></pre>
+<ul>
+<li>
+<p>the <code>{% extends ... %}</code> statement tells Jinja to use <code>base.html</code> as a starting point for this template<br />
+... placing what's between the <code>{% block ... %}</code> and <code>{% endblock ...%}</code> tags in the position with the same label (here <code>content</code>)</p>
+</li>
+<li>
+<p>there could be several such blocks within <code>base.html</code> and <code>index.html</code>, using different labels </p>
+</li>
+</ul>
+<h3 id="loops-and-dictionaries">Loops and dictionaries</h3>
+<pre><code class="language-html">  {% for activity in activities %}
+    &lt;tr&gt;
+      &lt;th scope=&quot;row&quot;&gt;{{ loop.index }}&lt;/th&gt;
+      &lt;td&gt;{{ activity['activity'] }}&lt;/td&gt;
+      &lt;td&gt;{{ activity['price'] }}&lt;/td&gt;
+    &lt;/tr&gt;
+   {% endfor %}
+</code></pre>
+<ul>
+<li>as we saw earlier, <code>{% for...%}</code> and <code>{% endfor... %}</code> designate loops to be completed for each item in a list</li>
+<li>we can use the same syntax as Python for getting values from dictionaries: <code>dictionary['key']</code></li>
+<li><code>loop.index</code> returns the current iteration count; note that this isn't zero-indexed, and the first value in the table is <code>1</code><ul>
+<li>zero-indexed values can be obtained using <code>loop.index0</code></li>
+</ul>
+</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+
+        <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

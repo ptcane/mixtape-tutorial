@@ -9,20 +9,20 @@ import re
 from glob import glob
 import time
 
-nbs = glob('notebooks/*.ipynb')
+nbs = glob(r'notebooks/*.ipynb')
 print(nbs)
 md_exclusions = []
-rv_exclusions = ['notebooks/pop-quiz.ipynb']
+rv_exclusions = [r'notebooks/pop-quiz.ipynb']
 
 md_nbs = [nb for nb in nbs if nb not in md_exclusions]
 rv_nbs = [nb for nb in nbs if nb not in rv_exclusions]
 
 tr_pp = TagRemovePreprocessor(remove_cell_tags=['remove'], remove_input_tags=['remove-input'])
 md_exp = MarkdownExporter(preprocessors=[tr_pp])
-rv_exp = SlidesExporter(reveal_theme='white', preprocessors=[tr_pp])
+rv_exp = SlidesExporter(reveal_theme='white', reveal_scroll=True, reveal_url_prefix= "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js", preprocessors=[tr_pp])
 
 for nb in rv_nbs:
-    nb_name = nb.rsplit('\\')[1].split('.')[0]
+    nb_name = nb.rsplit(r'/')[1].split('.')[0]
     slides_dest = f'docs/{nb_name}-slides.html'
 
     if os.path.exists(slides_dest):
@@ -31,8 +31,8 @@ for nb in rv_nbs:
     
 # #copy images folder
 
-source_dir = 'notebooks/images/'
-target_dir = 'docs/images/'
+source_dir = r'notebooks/images/'
+target_dir = r'docs/images/'
 file_names = os.listdir(source_dir)
 
 for file_name in file_names:
@@ -107,10 +107,9 @@ for nb in md_nbs:
 #Slides
 for nb in rv_nbs:
     
-    
     text, resources = rv_exp.from_file(nb)
     time.sleep(5)
-    nb_name = nb.rsplit('\\')[1].split('.')[0]
+    nb_name = nb.rsplit(r'/')[1].split('.')[0]
     slides_dest = f'docs/{nb_name}-slides.html'
 
     with open(slides_dest, 'a') as f:

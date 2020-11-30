@@ -9,6 +9,7 @@ nav:
     - Authentication: 'requests-auth.md'
     - Getting Data: 'requests-get-data.md'
     - Replit Database: 'replit-database.md'
+    - Flask Web Apps: 'flask-jinja-templates.md'
   
 
 markdown_extensions:

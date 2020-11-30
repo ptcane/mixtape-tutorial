@@ -18,12 +18,6 @@ It is a **lightweight web application framework** which is popular, flexible, an
 Take a look at [this repl](https://repl.it/@datadesigns/mixtape-flask-hello-world) to see how we can serve a web page with Flask:
 
 
-```python
-%%html
-<iframe height="600px" width="100%" src="https://repl.it/@datadesigns/mixtape-flask-hello-world?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-```
-
-
 <iframe height="600px" width="100%" src="https://repl.it/@datadesigns/mixtape-flask-hello-world?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 
 

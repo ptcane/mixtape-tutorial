@@ -13207,19 +13207,20 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Accessing-web-APIs-with-requests">Accessing web APIs with <code>requests</code><a class="anchor-link" href="#Accessing-web-APIs-with-requests">&#182;</a></h1>
+<h1 id="Flask-Web-Apps">Flask Web Apps<a class="anchor-link" href="#Flask-Web-Apps">&#182;</a></h1>
 </div>
 </div>
-</div><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Authorization">Authorization<a class="anchor-link" href="#Authorization">&#182;</a></h2><p>Most APIs require users to <strong>identify</strong> themselves, and have <strong>limits on the volume and frequency of requests</strong> each user can make, in order to:</p>
+<h2 id="Flask-web-framework">Flask web framework<a class="anchor-link" href="#Flask-web-framework">&#182;</a></h2><p><code>flask</code> is a Python package which can help you to:</p>
 <ul>
-<li>prevent excessive or malicious use overloading the server</li>
-<li>ensure the API remains available for genuine users</li>
+<li>quickly create dynamic web applications</li>
+<li>add functionality with many extensions available</li>
+<li>scale up in complexity when required</li>
 </ul>
-<p>This typically requires users to register, upon which they're provided with <strong>credentials</strong>, typically in the form of a unique <code>id</code> and an accompanying <code>key</code> or <code>secret</code>.</p>
+<p>It is a <strong>lightweight web application framework</strong> which is popular, flexible, and easy to get started with.</p>
 
 </div>
 </div>
@@ -13227,50 +13228,11 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Obtaining-Spotify-API-credentials">Obtaining Spotify API credentials<a class="anchor-link" href="#Obtaining-Spotify-API-credentials">&#182;</a></h3><p>We'll be using the <strong>Spotify API</strong> throughout the tutorial. In order to use it, you'll need a Spotify account.</p>
-<p><a href="https://developer.spotify.com/dashboard/">Log in or sign up (free)</a></p>
-<p>Follow <code>CREATE AN APP</code> from the Dashboard, then copy your <code>Client ID</code> and <code>Client Secret</code> to somewhere handy.</p>
-<p><img src="images/dashboard.png" alt="dashboard"></p>
+<h3 id="'Hello,-World'-example">'Hello, World' example<a class="anchor-link" href="#'Hello,-World'-example">&#182;</a></h3><p>Take a look at <a href="https://repl.it/@datadesigns/mixtape-flask-hello-world">this repl</a> to see how we can serve a web page with Flask:</p>
 
 </div>
 </div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Authentication">Authentication<a class="anchor-link" href="#Authentication">&#182;</a></h3><p>In addition to the <code>id</code> and <code>secret</code> we've just gathered, Spotify requires us to <strong>authenticate</strong> prior to requesting data.</p>
-<p>There are several options available; we'll be using the <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">Client Credentials Flow</a>. This will give us access to masses of data about the contents of the Spotify catalogue, but without access to personalized information such as user playlists.</p>
-<p>We'll send the <code>id</code> and <code>secret</code>to the API using a <code>POST</code> request, and be sent an <code>access_token</code> in the response.</p>
-
 </div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Obtaining-an-API-access_token">Obtaining an API <code>access_token</code><a class="anchor-link" href="#Obtaining-an-API-access_token">&#182;</a></h3><p>The <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">documentation</a> tells us that we'll need to:</p>
-<ul>
-<li>send a <code>POST</code> request to <code>https://accounts.spotify.com/api/token</code></li>
-<li>include <code>'grant_type': 'client_credentials'</code> in the request <strong>body</strong></li>
-<li>include <code>'Authorization' : 'Basic [base64 encoded client_id:client_secret]'</code> in the <strong>header</strong></li>
-</ul>
-<p>Fortunately, the <code>requests.post()</code> and <code>HTTPBasicAuth</code> functions will simplify this for us.</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="repl.it-code-snippet">repl.it code snippet<a class="anchor-link" href="#repl.it-code-snippet">&#182;</a></h3><p>First of all, <a href="https://repl.it/@datadesigns/seeder-requests-auth">fork the repl</a>. You'll see a file called <code>.env.example</code>; replace the credentials with your own, and change the filename to <code>.env</code></p>
-<ul>
-<li><em><code>.env</code> files aren't shared when a fork of a repl is made; they allow you to store values you don't want to share</em></li>
-</ul>
-<p><code>main.py</code> will be executed when you hit <code>Run</code>. If all is well, you should see a dictionary printed in the console below.</p>
-
-</div>
-</div>
-</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered celltag_remove-input">
 
 <div class="output_wrapper">
@@ -13284,7 +13246,7 @@ a.anchor-link {
 
 
 <div class="output_html rendered_html output_subarea ">
-<iframe height="800px" width="100%" src="https://repl.it/@datadesigns/seeder-requests-auth?lite=false" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+<iframe height="600px" width="100%" src="https://repl.it/@datadesigns/mixtape-flask-hello-world?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 
 </div>
 
@@ -13297,35 +13259,16 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Code-walkthrough">Code walkthrough<a class="anchor-link" href="#Code-walkthrough">&#182;</a></h2><p>Let's go through <code>main.py</code> and see what happened...</p>
-<h3 id="Accessing-our-credentials">Accessing our credentials<a class="anchor-link" href="#Accessing-our-credentials">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">HTTPBasicAuth</span>
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="n">client_id</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CLIENT_ID&quot;</span><span class="p">)</span>
-<span class="n">client_secret</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CLIENT_SECRET&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 </pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>we imported the <code>requests</code> and <code>os</code> packages, and the <code>HTTPBasicAuth</code> submodule</li>
-<li>we used the <code>.getenv()</code> method to collect our credentials from the <code>.env</code> file</li>
+<li>we imported the <code>Flask</code> class definition, and assigned an instance of it to <code>app</code></li>
+</ul>
+<p>Things we don't need to worry about for now, but:</p>
+<ul>
+<li><code>__name__</code>is a special Python variable which determines where Flask should look for files such as templates</li>
+<li><code>__main__</code> will be the value of <code>__name__</code> if this file is itself being run directly rather than by another file</li>
 </ul>
 
 </div>
@@ -13334,29 +13277,96 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Defining-components-for-the-request">Defining components for the request<a class="anchor-link" href="#Defining-components-for-the-request">&#182;</a></h3>
+<div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</pre></div>
+<ul>
+<li>this is a  <strong>decorator</strong>, which acts as a '<strong>wrapper</strong>' around the subsequent function</li>
+<li>in short this tells Flask to use the function to determine what will be shown at the 'root URL', i.e. mysite.com<strong><code>/</code></strong></li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;Hello, World&#39;</span>
+</pre></div>
+<ul>
+<li>our function returns some text, which is shown on the web page</li>
+<li>it could be called anything, but usually <code>index</code> is used for the root URL</li>
+</ul>
+
 </div>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can use the Python <code>help()</code> function to see the docstring for <code>requests.post()</code>:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
+<ul>
+<li><code>__name__</code> will equal <code>__main__</code> because we are running the file directly (unimportant for now)</li>
+<li>the <code>.run()</code> method of <code>app</code> will serve the page at the given <code>host</code> (required for replit)</li>
+<li><code>debug=True</code> means we can see changes in the page without running the code again</li>
+</ul>
+<p><em>Try changing the 'Hello, World' text and refreshing the page.</em></p>
 
-    </div>
 </div>
 </div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Jinja-templates">Jinja templates<a class="anchor-link" href="#Jinja-templates">&#182;</a></h2><p><code>jinja</code> is a Python package which is used for <strong>templating</strong>. We can use it to:</p>
+<ul>
+<li>create reusable structures for web pages (such as the header and footer)</li>
+<li>combine blocks of content into a single document or web page</li>
+<li>conditionally include elements or specific data based on user inputs</li>
+</ul>
+<p>The <strong>syntax</strong> used in Jinja templates is <strong>similar to Python</strong>.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Jinja-syntax-example">Jinja syntax example<a class="anchor-link" href="#Jinja-syntax-example">&#182;</a></h3><p>This code snippet is taken from the example we'll see later, showing a part of the template where rows in a template are created based on data in a list of dictionaries:</p>
+<div class="highlight"><pre><span></span>{% for activity in activities %}
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>{{ loop.index }}<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ activity[&#39;activity&#39;] }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ activity[&#39;price&#39;] }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+    {% endfor %}
+</pre></div>
+<ul>
+<li>we can see <strong>statements</strong> within <code>{% ... %}</code> tags (here designating a <code>for</code> loop)</li>
+<li>we can see <strong>expressions</strong> within <code>{{ ... }}</code> tags (here looking up values in a dictionary)</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Flask-&amp;-Jinja-templates">Flask &amp; Jinja templates<a class="anchor-link" href="#Flask-&amp;-Jinja-templates">&#182;</a></h2><p>Rather than our page function to simply return text, we can use the <code>flask.render_template()</code> function to:</p>
+<ul>
+<li>return a jinja template instead to be displayed (which itself may incorporate other templates)</li>
+<li>pass Python data structures to be used by that template (such as lists and dictionaries)</li>
+</ul>
+<p>This is a powerful combination which is central to making our web pages <strong>dynamic</strong>.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Code-walkthrough---Flask">Code walkthrough - Flask<a class="anchor-link" href="#Code-walkthrough---Flask">&#182;</a></h3><p>Here's a Flask example which uses Jinja templating, including the code we've just seen:</p>
+<p><a href="https://repl.it/@datadesigns/mixtape-flask-jinja#main.py">fork the repl</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered celltag_remove-input">
 
 <div class="output_wrapper">
 <div class="output">
@@ -13367,84 +13377,102 @@ a.anchor-link {
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Help on function post in module requests.api:
 
-post(url, data=None, json=None, **kwargs)
-    Sends a POST request.
-    
-    :param url: URL for the new :class:`Request` object.
-    :param data: (optional) Dictionary, list of tuples, bytes, or file-like
-        object to send in the body of the :class:`Request`.
-    :param json: (optional) json data to send in the body of the :class:`Request`.
-    :param \*\*kwargs: Optional arguments that ``request`` takes.
-    :return: :class:`Response &lt;Response&gt;` object
-    :rtype: requests.Response
+<div class="output_html rendered_html output_subarea ">
+<iframe height="900px" width="100%" src="https://repl.it/@datadesigns/mixtape-flask-jinja?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 
-</pre>
 </div>
+
 </div>
 
 </div>
 </div>
 
 </div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://accounts.spotify.com/api/token&#39;</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;grant_type&#39;</span><span class="p">:</span> <span class="s1">&#39;client_credentials&#39;</span><span class="p">}</span>
-<span class="n">auth</span><span class="o">=</span><span class="n">HTTPBasicAuth</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span> <span class="n">client_secret</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="n">site_name</span> <span class="o">=</span> <span class="s1">&#39;Bucket List&#39;</span>
+<span class="n">activities</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.boredapi.com/api/activity?type=recreational&#39;</span><span class="p">)</span>
+    <span class="n">activities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</pre></div>
 <ul>
-<li>our <code>url</code> is the one given by the API documentation</li>
-<li><code>data</code> is the <code>parameter:value</code> pair required to be in the body</li>
-<li><code>auth</code> is an optional <strong>keyword argument</strong></li>
-<li>the <code>HTTPBasicAuth</code> method has done the required <strong>encoding</strong> and <strong>formatting</strong> of the credentials for us</li>
+<li>we've set <code>site_name</code> to a string, which we'll use in our web page</li>
+<li>we've used <code>requests.get()</code> as seen previously to collect data from an API<ul>
+<li>in this case, the <a href="www.boredapi.com">Bored API</a>, which doesn't require credentials</li>
 </ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Making-a-POST-request">Making a <code>POST</code> request<a class="anchor-link" href="#Making-a-POST-request">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
-<span class="n">response</span><span class="o">.</span><span class="n">ok</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><p>we used the <code>.post()</code> method of <code>requests</code> with the arguments we had defined, assigning the returned object to <code>response</code></p>
 </li>
-<li><p>the <code>.ok</code> attribute of the <code>Response</code> object is <code>True</code>, meaning that the response was successful</p>
+<li><code>activities</code> now has a list of dictionaries containing data for our page</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">site_name</span><span class="o">=</span><span class="n">site_name</span><span class="p">,</span> <span class="n">activities</span><span class="o">=</span><span class="n">activities</span><span class="p">)</span>
+</pre></div>
+<ul>
+<li>we've called the <code>render_template()</code> function, giving our template file as the first argument, followed by two <strong>keyword arguments</strong> containing our data to be used by the template  </li>
+<li>the variable names used in the Python logic are typically (but don't have to be) the same as those used in the Jinja templates</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Code-walkthrough---Jinja-templates">Code walkthrough - Jinja templates<a class="anchor-link" href="#Code-walkthrough---Jinja-templates">&#182;</a></h3><p>Take a look at <code>base.html</code>:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ site_name }}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>    
+    {% block content %}
+    {% endblock %}
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</pre></div>
+<ul>
+<li>the value passed for <code>site_name</code> will be used as the <code>title</code> (shown in the browser tab)</li>
+<li>any templates which <strong>extend</strong> this template can insert a <strong>block</strong> labelled <code>content</code> in the given location
+_</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The rest of <code>base.html</code> is simply a '<strong>boilerplate</strong>' or 'blank canvas' for using the <strong>Bootstrap</strong> CSS framework:</p>
+<ul>
+<li>the <strong>viewport</strong> metadata ensures the page will be <strong>responsive</strong></li>
+<li>the Bootstrap CSS is imported from a <strong>CDN</strong> (Content Delivery Network)</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Blocks-and-extensions">Blocks and extensions<a class="anchor-link" href="#Blocks-and-extensions">&#182;</a></h3><p>Take a look at <code>index.html</code>:</p>
+<div class="highlight"><pre><span></span>{% extends &quot;base.html&quot; %}
+{% block content %}
+...
+{% endblock %}
+</pre></div>
+<ul>
+<li><p>the <code>{% extends ... %}</code> statement tells Jinja to use <code>base.html</code> as a starting point for this template<br>
+... placing what's between the <code>{% block ... %}</code> and <code>{% endblock ...%}</code> tags in the position with the same label (here <code>content</code>)</p>
+</li>
+<li><p>there could be several such blocks within <code>base.html</code> and <code>index.html</code>, using different labels</p>
 </li>
 </ul>
 
@@ -13454,122 +13482,22 @@ post(url, data=None, json=None, **kwargs)
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Accessing-response-data">Accessing response data<a class="anchor-link" href="#Accessing-response-data">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<h3 id="Loops-and-dictionaries">Loops and dictionaries<a class="anchor-link" href="#Loops-and-dictionaries">&#182;</a></h3><div class="highlight"><pre><span></span>{% for activity in activities %}
+    <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">th</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>{{ loop.index }}<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ activity[&#39;activity&#39;] }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ activity[&#39;price&#39;] }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+   {% endfor %}
 </pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[28]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>{&#39;access_token&#39;: &#39;BQA5XobojGmQ22qGfcf1XSX1xTJD6pH6oeltC5HtX5fML8ps_uDp1U74ybc5M45CmmRf8DX8FAFjOivOae4&#39;,
- &#39;token_type&#39;: &#39;Bearer&#39;,
- &#39;expires_in&#39;: 3600,
- &#39;scope&#39;: &#39;&#39;}</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>the <code>.json()</code> method of the <code>response</code> object returned by the API converts the included <strong>JSON object</strong> into a Python dictionary</li>
-<li>the <code>key:value</code> pairs include the <code>access_token</code> we need; highlight and right-click it to copy (usual shortcuts don't work in the console)</li>
-<li>also note the <code>expires_in</code> value - this is the time in seconds (i.e. one hour) that the token will remain usable for</li>
+<li>as we saw earlier, <code>{% for...%}</code> and <code>{% endfor... %}</code> designate loops to be completed for each item in a list</li>
+<li>we can use the same syntax as Python for getting values from dictionaries: <code>dictionary['key']</code></li>
+<li><code>loop.index</code> returns the current iteration count; note that this isn't zero-indexed, and the first value in the table is <code>1</code><ul>
+<li>zero-indexed values can be obtained using <code>loop.index0</code></li>
 </ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Status-codes">Status codes<a class="anchor-link" href="#Status-codes">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[29]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>200</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The <code>.status_code</code> attribute indicates whether the request was successful, and if not, what went wrong.</p>
-<ul>
-<li>in short, <code>200</code> is good news, as is anything in the <code>200</code>s </li>
-<li>codes in the <code>400</code>s typcially indicate an issue with your code or parameters</li>
-<li>codes in the <code>500</code>s indicate something is malfunctioning on the server</li>
+</li>
 </ul>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">More about response codes</a></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="JSON-data-structures">JSON data structures<a class="anchor-link" href="#JSON-data-structures">&#182;</a></h2><p>JSON (<strong>JavaScript Object Notation</strong>) is the most popular data format used by web APIs.</p>
-<p>Fortunately for Python programmers, it is fairly straightforward to map JSON to equivalent Python data structures, data types and values (and as shown above, modules which can do this for us).</p>
-<ul>
-<li><strong>JSON objects</strong> are much like <strong>Python dictionaries</strong>, with comma-separated <code>key:value</code> pairs inside <code>{</code> braces <code>}</code></li>
-<li><strong>JSON arrays</strong> are much like <strong>Python lists</strong>, with an ordered collection of comma-separated values inside <code>[</code> brackets <code>]</code></li>
-</ul>
-<p>The JSON values <code>true</code>, <code>false</code> and <code>null</code> are equivalent to the Python values <code>True</code>, <code>False</code> and <code>None</code> respectively.</p>
 
 </div>
 </div>
