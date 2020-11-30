@@ -7,14 +7,28 @@ from nbconvert import MarkdownExporter, SlidesExporter
 from nbconvert.preprocessors import TagRemovePreprocessor
 import re
 from glob import glob
+import time
 
 nbs = glob('notebooks/*.ipynb')
+print(nbs)
 md_exclusions = []
 rv_exclusions = ['notebooks/pop-quiz.ipynb']
 
 md_nbs = [nb for nb in nbs if nb not in md_exclusions]
 rv_nbs = [nb for nb in nbs if nb not in rv_exclusions]
 
+tr_pp = TagRemovePreprocessor(remove_cell_tags=['remove'], remove_input_tags=['remove-input'])
+md_exp = MarkdownExporter(preprocessors=[tr_pp])
+rv_exp = SlidesExporter(reveal_theme='white', preprocessors=[tr_pp])
+
+for nb in rv_nbs:
+    nb_name = nb.rsplit('\\')[1].split('.')[0]
+    slides_dest = f'docs/{nb_name}-slides.html'
+
+    if os.path.exists(slides_dest):
+        os.remove(slides_dest)
+
+    
 # #copy images folder
 
 source_dir = 'notebooks/images/'
@@ -22,8 +36,17 @@ target_dir = 'docs/images/'
 file_names = os.listdir(source_dir)
 
 for file_name in file_names:
-    shutil.copy(os.path.join(source_dir, file_name), target_dir)
-# 
+    try:
+        shutil.copy(os.path.join(source_dir, file_name), target_dir)
+    except:
+        pass
+
+#copy custom.css
+try:
+    shutil.copy('notebooks/custom.css', 'docs/custom.css')
+    print('custom.css copied to docs/')
+except:
+    pass
 
 #markdown
 regex = re.compile(r"```(\n)+((\ {4,}?.+(\n+))+)\n")
@@ -33,9 +56,6 @@ prefix_offset = 3
 suffix_offset = 0
 max_matches = None
 start_index = 0
-
-tr_pp = TagRemovePreprocessor(remove_cell_tags=['remove'], remove_input_tags=['remove-input'])
-md_exp = MarkdownExporter(preprocessors=[tr_pp])
 
 for nb in md_nbs:
 
@@ -85,16 +105,14 @@ for nb in md_nbs:
 
 
 #Slides
-rv_exp = SlidesExporter(reveal_theme='white', preprocessors=[tr_pp])
-
 for nb in rv_nbs:
-    nb_name = nb.rsplit('/')[1].split('.')[0]
-    slides_dests = [f'docs/{nb_name}-slides.html']
-
+    
+    
     text, resources = rv_exp.from_file(nb)
+    time.sleep(5)
+    nb_name = nb.rsplit('\\')[1].split('.')[0]
+    slides_dest = f'docs/{nb_name}-slides.html'
 
-    for dest in slides_dests:
-
-        with open(dest, 'a') as f:
-            f.write(text)
-            print(f'{dest} created.')
+    with open(slides_dest, 'a') as f:
+        f.write(text)
+        print(f'{slides_dest} created.')
