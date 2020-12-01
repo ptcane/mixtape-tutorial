@@ -101,7 +101,9 @@ Rather than our page function to simply return text, we can use the `flask.rende
 - return a jinja template instead to be displayed (which itself may incorporate other templates)
 - pass Python data structures to be used by that template (such as lists and dictionaries)
 
-This is a powerful combination which is central to making our web pages **dynamic**.
+This is a powerful combination which is central to making our web pages **dynamic**. 
+
+By default, Flask will look for templates in the `/templates` directory next to the application code.
 
 
 ### Code walkthrough - Flask
@@ -118,6 +120,7 @@ Here's a Flask example which uses Jinja templating, including the code we've jus
 ```python
 site_name = 'Bucket List'
 activities = []
+votes = [0, 0, 0, 0, 0]
 
 for i in range(5):
     resp = requests.get('https://www.boredapi.com/api/activity?type=recreational')
@@ -128,14 +131,35 @@ for i in range(5):
 - we've used `requests.get()` as seen previously to collect data from an API
  - in this case, the [Bored API](https://www.boredapi.com), which doesn't require credentials
 - `activities` now has a list of dictionaries containing data for our page
+- `votes` is a list of values which we can subsequently modify
+
+### Using `request`
+
+`flask.request` allows us to determine how a web page we've served with Flask was requested
+
+- this isn't to be confused with the `requests` package we just used to fetch data  
+... but the terminology is the same, i.e. `GET` and `POST` requests
 
 ```python
-@app.route('/')
-def index():
-
-    return render_template('index.html', site_name=site_name, activities=activities)
+@app.route('/', methods=['GET', 'POST'])
 ```
 
+- the `methods` parameter determines which types of `request` for the given `route` i.e. URL are allowed; by default this is only `GET`
+
+```python
+def index():
+    if request.method == 'POST':
+        choice = int(request.form['choice'])
+        votes[choice] += 1
+```
+- if the page is served due to a `POST` request, we'll record the input by modifying our `votes` list
+- if there's a `GET` request, this will be skipped and `votes` left unmodified
+
+### Using `render_template()`
+
+```python
+    return render_template('index.html', site_name=site_name, activities=activities, votes=votes)
+```
 - we've called the `render_template()` function, giving our template file as the first argument, followed by two **keyword arguments** containing our data to be used by the template  
 - the variable names used in the Python logic are typically (but don't have to be) the same as those used in the Jinja templates
 
@@ -188,6 +212,7 @@ Take a look at `index.html`:
       <th scope="row">{{ loop.index }}</th>
       <td>{{ activity['activity'] }}</td>
       <td>{{ activity['price'] }}</td>
+      ...  
     </tr>
    {% endfor %}
 ```
@@ -196,3 +221,18 @@ Take a look at `index.html`:
 - we can use the same syntax as Python for getting values from dictionaries: `dictionary['key']`
 - `loop.index` returns the current iteration count; note that this isn't zero-indexed, and the first value in the table is `1`
     - zero-indexed values can be obtained using `loop.index0`
+
+### Forms and `POST` requests
+
+```html
+<td>
+  <form action="." method="POST">
+    <button type="submit" class="btn btn-outline-primary" value="{{ loop.index0 }}" name="choice">
+      <span class="badge badge-light">{{ votes[loop.index0] }}</span>
+    </button>  
+  </form>
+</td> 
+```
+- in the last column of the table, we use a `form` with a `method` attribute of `POST`
+- the `action` attributes tells the browser *where* to send the data, with `.` meaning 'the current page'
+- notice how the `name` and `value` attributes of the `button` match with our logic in the `index` function
