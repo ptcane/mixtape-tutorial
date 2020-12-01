@@ -44,14 +44,14 @@ Fortunately, the `requests.post()` and `HTTPBasicAuth` functions will simplify t
 
 ### repl.it code snippet
 
-First of all, [fork the repl](https://repl.it/@datadesigns/seeder-requests-auth). You'll see a file called `.env.example`; replace the credentials with your own, and change the filename to `.env`
+First of all, [fork the repl](https://repl.it/@datadesigns/mixtape-requests-auth). You'll see a file called `.env.example`; replace the credentials with your own, and change the filename to `.env`
 
 - *`.env` files aren't shared when a fork of a repl is made; they allow you to store values you don't want to share*
 
 `main.py` will be executed when you hit `Run`. If all is well, you should see a dictionary printed in the console below.
 
 
-<iframe height="800px" width="100%" src="https://repl.it/@datadesigns/seeder-requests-auth?lite=false" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+<iframe height="800px" width="100%" src="https://repl.it/@datadesigns/mixtape-requests-auth?lite=false" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 
 
 
