@@ -14451,14 +14451,18 @@ div.jp-OutputPrompt {
     <span class="k">if</span> <span class="n">track_id</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="n">track_id</span><span class="p">]</span>       
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">get_track_data</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span> <span class="n">track_id</span><span class="p">)</span>    
+        <span class="n">data</span> <span class="o">=</span> <span class="n">get_track_data</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span> <span class="n">track_id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">db</span><span class="p">[</span><span class="n">track_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>    
     <span class="o">...</span>
 </pre></div>
 <ul>
 <li>we're going to <strong>iterate</strong> through each entry in <code>track_ids</code> using a <code>for</code> loop</li>
 <li>we check to see if <code>track_id</code> is a key in the <code>db</code> (meaning it has been stored previously)</li>
 <li>if it's in the <code>db</code> we collect the data from there</li>
-<li>if not, we use <code>get_track_data()</code> to collect it from the Spotify API</li>
+<li>if not, we use <code>get_track_data()</code> to request it from the Spotify API</li>
+<li>if our request is successful, we write the returned data to the <code>db</code></li>
 </ul>
 
 </div>

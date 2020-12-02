@@ -1,6 +1,6 @@
 [tool.poetry]
 
-name = "MixTape Tutorial"
+name = "MixTape-Tutorial"
 version = "0.1"
 description = "MixTape Tutorial"
 license = "MIT"

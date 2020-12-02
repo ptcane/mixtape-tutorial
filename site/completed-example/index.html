@@ -167,14 +167,18 @@ for track_id in track_ids:
     if track_id in db.keys():
         data = db[track_id]       
     else:
-        data = get_track_data(access_token, track_id)    
+        data = get_track_data(access_token, track_id)
+
+        if data:
+            db[track_id] = data    
     ...
 </code></pre>
 <ul>
 <li>we're going to <strong>iterate</strong> through each entry in <code>track_ids</code> using a <code>for</code> loop</li>
 <li>we check to see if <code>track_id</code> is a key in the <code>db</code> (meaning it has been stored previously)</li>
 <li>if it's in the <code>db</code> we collect the data from there</li>
-<li>if not, we use <code>get_track_data()</code> to collect it from the Spotify API</li>
+<li>if not, we use <code>get_track_data()</code> to request it from the Spotify API</li>
+<li>if our request is successful, we write the returned data to the <code>db</code></li>
 </ul>
 <pre><code class="language-python">    ...
     if not data:
