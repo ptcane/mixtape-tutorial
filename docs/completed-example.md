@@ -5,7 +5,7 @@
 
 ## Example app
 
-Here's a [repl](https://repl.it/@datadesigns/mixtape-example) with `mixtape.py` completed, and the cards filled using data previously written to the `replit` database:
+Here's a [repl](https://repl.it/@datadesigns/mixtape-example){target=_blank} with `mixtape.py` completed, and the cards filled using data previously written to the `replit` database:
 
 
 <iframe height="1000px" width="100%" src="https://repl.it/@datadesigns/mixtape-example?lite=true&outputonly=1" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
@@ -100,7 +100,7 @@ The Jinja `for` statement was already in place, to create a card for each item i
 
 ## Adios amigos!
 
-If you enjoyed the project and would like to go further, check out the [Seeder app](https://seeder.datadesigns.repl.co/) and [tutorial](https://seeder-tutorial.datadesigns.repl.co/), where we:
+If you enjoyed the project and would like to go further, check out the [Seeder app](https://seeder.datadesigns.repl.co/){target=_blank} and [tutorial](https://seeder-tutorial.datadesigns.repl.co/){target=_blank}, where we:
 
 - automatically **refresh our access token** when required
 - automatically **refresh our tracks** each day based on previous votes
@@ -108,4 +108,4 @@ If you enjoyed the project and would like to go further, check out the [Seeder a
 - handle **multiple concurrent users** with Flask `session` logic
 - create **data visualisations** using track features data from Spotify
 
-Finally, please [get in touch](https://www.datadesigns.co.uk/contact/) with me if you have any questions, comments, or feedback. Cheers!
+Finally, please [get in touch](https://www.datadesigns.co.uk/contact/){target=_blank} with me if you have any questions, comments, or feedback. Cheers!

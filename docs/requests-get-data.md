@@ -5,7 +5,7 @@
 
 ## API endpoints
 
-Our first port of call should be the [documentation](https://developer.spotify.com/documentation/web-api/reference/) - take a look around the sections in the **API Endpoint Reference**.
+Our first port of call should be the [documentation](https://developer.spotify.com/documentation/web-api/reference/){target=_blank} - take a look around the sections in the **API Endpoint Reference**.
 
 You'll discover:
 
@@ -25,7 +25,7 @@ We previously covered how REST APIs typically support `GET` requests, which can 
 
 ### repl.it code snippet
 
-Fork the [repl](https://repl.it/@datadesigns/mixtape-requests-get-data) and **copy your `access_token` into `main.py`** (you'll need to create a new one if it's more than an hour old).
+Fork the [repl](https://repl.it/@datadesigns/mixtape-requests-get-data){target=_blank} and **copy your `access_token` into `main.py`** (you'll need to create a new one if it's more than an hour old).
 
 
 <iframe height="800px" width="100%" src="https://repl.it/@datadesigns/mixtape-requests-get-data?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
@@ -52,7 +52,7 @@ headers = {'Authorization': f'Bearer {access_token}'}
 - we created a `headers` dictionary, with this `parameter:value` pair:  
     `Authorization: Bearer [access_token]`
     
-*Notice that we had to do some work to get the value in the format the API requires (with `Bearer ` before the `access_token`); this is mentioned in the [API documentation](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) but wasn't clear to me before Google came to the rescue.*
+*Notice that we had to do some work to get the value in the format the API requires (with `Bearer ` before the `access_token`); this is mentioned in the [API documentation](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow){target=_blank} but wasn't clear to me before Google came to the rescue.*
 
 ### URL components
 
@@ -66,7 +66,7 @@ full_url = f'{base_url}{endpoint}{identifier}'
 
 - the URL is in component parts and combined using an f-string; this will allow us to make further requests to different endpoints more easily
 
-- the `identifier` value is a `track_id`; you can get these from the  [Spotify Web Player](https://open.spotify.com/):  
+- the `identifier` value is a `track_id`; you can get these from the  [Spotify Web Player](https://open.spotify.com/){target=_blank}:  
 
     - right-click on any **song title**
     - click `Share` then `Copy Song Link`

@@ -16,7 +16,7 @@ This typically requires users to register, upon which they're provided with **cr
 
 We'll be using the **Spotify API** throughout the tutorial. In order to use it, you'll need a Spotify account. 
 
-[Log in or sign up (free)](https://developer.spotify.com/dashboard/)
+[Log in or sign up (free)](https://developer.spotify.com/dashboard/){target=_blank}
 
 Follow `CREATE AN APP` from the Dashboard, then copy your `Client ID` and `Client Secret` to somewhere handy. 
 
@@ -26,13 +26,13 @@ Follow `CREATE AN APP` from the Dashboard, then copy your `Client ID` and `Clien
 
 In addition to the `id` and `secret` we've just gathered, Spotify requires us to **authenticate** prior to requesting data. 
 
-There are several options available; we'll be using the [Client Credentials Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow). This will give us access to masses of data about the contents of the Spotify catalogue, but without access to personalized information such as user playlists.
+There are several options available; we'll be using the [Client Credentials Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow){target=_blank}. This will give us access to masses of data about the contents of the Spotify catalogue, but without access to personalized information such as user playlists.
 
 We'll send the `id` and `secret`to the API using a `POST` request, and be sent an `access_token` in the response.
 
 ### Obtaining an API `access_token`
 
-The [documentation](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) tells us that we'll need to:
+The [documentation](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow){target=_blank} tells us that we'll need to:
 
 - send a `POST` request to `https://accounts.spotify.com/api/token`
 - include `'grant_type': 'client_credentials'` in the request **body**
@@ -44,7 +44,7 @@ Fortunately, the `requests.post()` and `HTTPBasicAuth` functions will simplify t
 
 ### repl.it code snippet
 
-First of all, [fork the repl](https://repl.it/@datadesigns/mixtape-requests-auth). You'll see a file called `.env.example`; replace the credentials with your own, and change the filename to `.env`
+First of all, [fork the repl](https://repl.it/@datadesigns/mixtape-requests-auth){target=_blank}. Next, create a new file called `.env`, and then enter your credentials in the format shown in `.env.example`.
 
 - *`.env` files aren't shared when a fork of a repl is made; they allow you to store values you don't want to share*
 
@@ -157,7 +157,7 @@ The `.status_code` attribute indicates whether the request was successful, and i
 - codes in the `400`s typcially indicate an issue with your code or parameters
 - codes in the `500`s indicate something is malfunctioning on the server
 
-[More about response codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+[More about response codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status){target=_blank}
 
 ## JSON data structures
 

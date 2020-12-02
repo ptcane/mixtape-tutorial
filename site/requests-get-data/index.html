@@ -130,7 +130,7 @@
 </div>
 <h1>Getting data with <code>requests</code></h1>
 <h2 id="api-endpoints">API endpoints</h2>
-<p>Our first port of call should be the <a href="https://developer.spotify.com/documentation/web-api/reference/">documentation</a> - take a look around the sections in the <strong>API Endpoint Reference</strong>.</p>
+<p>Our first port of call should be the <a href="https://developer.spotify.com/documentation/web-api/reference/" target="_blank">documentation</a> - take a look around the sections in the <strong>API Endpoint Reference</strong>.</p>
 <p>You'll discover:</p>
 <ul>
 <li>the <code>base_url</code> for the API is <code>https://api.spotify.com/v1</code></li>
@@ -145,7 +145,7 @@
 <h2 id="using-requestsget">Using <code>requests.get()</code></h2>
 <p>We previously covered how REST APIs typically support <code>GET</code> requests, which can be used to <strong>retrieve data</strong> from the API.</p>
 <h3 id="replit-code-snippet">repl.it code snippet</h3>
-<p>Fork the <a href="https://repl.it/@datadesigns/mixtape-requests-get-data">repl</a> and <strong>copy your <code>access_token</code> into <code>main.py</code></strong> (you'll need to create a new one if it's more than an hour old).</p>
+<p>Fork the <a href="https://repl.it/@datadesigns/mixtape-requests-get-data" target="_blank">repl</a> and <strong>copy your <code>access_token</code> into <code>main.py</code></strong> (you'll need to create a new one if it's more than an hour old).</p>
 <iframe height="800px" width="100%" src="https://repl.it/@datadesigns/mixtape-requests-get-data?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 
 <h2 id="code-walkthrough">Code walkthrough</h2>
@@ -163,7 +163,7 @@ headers = {'Authorization': f'Bearer {access_token}'}
 <li>we created a <code>headers</code> dictionary, with this <code>parameter:value</code> pair:<br />
 <code>Authorization: Bearer [access_token]</code></li>
 </ul>
-<p><em>Notice that we had to do some work to get the value in the format the API requires (with <code>Bearer</code> before the <code>access_token</code>); this is mentioned in the <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">API documentation</a> but wasn't clear to me before Google came to the rescue.</em></p>
+<p><em>Notice that we had to do some work to get the value in the format the API requires (with <code>Bearer</code> before the <code>access_token</code>); this is mentioned in the <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow" target="_blank">API documentation</a> but wasn't clear to me before Google came to the rescue.</em></p>
 <h3 id="url-components">URL components</h3>
 <pre><code class="language-python">base_url = 'https://api.spotify.com/v1'
 endpoint = '/tracks/'
@@ -175,7 +175,7 @@ full_url = f'{base_url}{endpoint}{identifier}'
 <p>the URL is in component parts and combined using an f-string; this will allow us to make further requests to different endpoints more easily</p>
 </li>
 <li>
-<p>the <code>identifier</code> value is a <code>track_id</code>; you can get these from the  <a href="https://open.spotify.com/">Spotify Web Player</a>:  </p>
+<p>the <code>identifier</code> value is a <code>track_id</code>; you can get these from the  <a href="https://open.spotify.com/" target="_blank">Spotify Web Player</a>:  </p>
 <ul>
 <li>right-click on any <strong>song title</strong></li>
 <li>click <code>Share</code> then <code>Copy Song Link</code></li>

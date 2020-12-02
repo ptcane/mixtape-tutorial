@@ -19,7 +19,7 @@ Then, we can:
 
 ### repl.it code snippet
 
-Fork the [repl](https://repl.it/@datadesigns/mixtape-replit-database) and **copy your `access_token` into `main.py`** (you'll need to create a new one if it's more than an hour old).
+Fork the [repl](https://repl.it/@datadesigns/mixtape-replit-database){target=_blank} and **copy your `access_token` into `main.py`** (you'll need to create a new one if it's more than an hour old).
 
 
 

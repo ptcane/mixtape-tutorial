@@ -15,7 +15,7 @@ It is a **lightweight web application framework** which is popular, flexible, an
 
 ### 'Hello, World' example
 
-Take a look at [this repl](https://repl.it/@datadesigns/mixtape-flask-hello-world) to see how we can serve a web page with Flask:
+Take a look at [this repl](https://repl.it/@datadesigns/mixtape-flask-hello-world){target=_blank} to see how we can serve a web page with Flask:
 
 
 <iframe height="600px" width="100%" src="https://repl.it/@datadesigns/mixtape-flask-hello-world?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
@@ -110,7 +110,7 @@ By default, Flask will look for templates in the `/templates` directory next to 
 
 Here's a Flask example which uses Jinja templating, including the code we've just seen:  
 
-[fork the repl](https://repl.it/@datadesigns/mixtape-flask-jinja#main.py)
+[fork the repl](https://repl.it/@datadesigns/mixtape-flask-jinja#main.py){target=_blank}
 
 
 <iframe height="900px" width="100%" src="https://repl.it/@datadesigns/mixtape-flask-jinja?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
@@ -129,7 +129,7 @@ for i in range(5):
 
 - we've set `site_name` to a string, which we'll use in our web page
 - we've used `requests.get()` as seen previously to collect data from an API
- - in this case, the [Bored API](https://www.boredapi.com), which doesn't require credentials
+ - in this case, the [Bored API](https://www.boredapi.com){target=_blank}, which doesn't require credentials
 - `activities` now has a list of dictionaries containing data for our page
 - `votes` is a list of values which we can subsequently modify
 

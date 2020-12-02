@@ -7,7 +7,7 @@
 
 Now it's time to apply what you've learned to complete your app!
 
-Fork the [repl](https://repl.it/@datadesigns/mixtape) to get started.
+Fork the [repl](https://repl.it/@datadesigns/mixtape){target=_blank} to get started.
 
 
 <iframe height="1000px" width="100%" src="https://repl.it/@datadesigns/mixtape?lite=true&outputonly=1" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
@@ -53,9 +53,9 @@ Finally, see if you can add some different styling to the app. We'll take a look
 
 You'll notice in `base.html` that several **stylesheets** are imported, and that these can be found in the `/static` folder. 
 
-- `bootstrap.css` was generated using the [bootstrap.build](https://bootstrap.build/themes) service, using the [Sandstone theme](https://bootstrap.build/app/project/UroRGaxfXxdg)
+- `bootstrap.css` was generated using the [bootstrap.build](https://bootstrap.build/themes){target=_blank} service, using the [Sandstone theme](https://bootstrap.build/app/project/UroRGaxfXxdg){target=_blank}
     - the `_variables.scss` file allows you to retainany customizations made with the tool
-- the [Album](https://getbootstrap.com/docs/4.0/examples/album/) example from the Bootstrap site was used as a basis for the page design and its CSS is in `album.css`  
+- the [Album](https://getbootstrap.com/docs/4.0/examples/album/){target=_blank} example from the Bootstrap site was used as a basis for the page design and its CSS is in `album.css`  
 - `custom.css` includes some further customizations, to fonts and the design of the cards
 
 ## Google fonts
@@ -71,7 +71,7 @@ h1, h2 {
 
 ![google-fonts](images/google-fonts.png)
 
-- we can get `@import` statements and associated `font-family` values for numerous other fonts from [Google Fonts](https://fonts.google.com/)
+- we can get `@import` statements and associated `font-family` values for numerous other fonts from [Google Fonts](https://fonts.google.com/){target=_blank}
 
 ## CSS variables
 

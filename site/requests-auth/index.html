@@ -133,15 +133,15 @@
 <p>This typically requires users to register, upon which they're provided with <strong>credentials</strong>, typically in the form of a unique <code>id</code> and an accompanying <code>key</code> or <code>secret</code>.</p>
 <h3 id="obtaining-spotify-api-credentials">Obtaining Spotify API credentials</h3>
 <p>We'll be using the <strong>Spotify API</strong> throughout the tutorial. In order to use it, you'll need a Spotify account. </p>
-<p><a href="https://developer.spotify.com/dashboard/">Log in or sign up (free)</a></p>
+<p><a href="https://developer.spotify.com/dashboard/" target="_blank">Log in or sign up (free)</a></p>
 <p>Follow <code>CREATE AN APP</code> from the Dashboard, then copy your <code>Client ID</code> and <code>Client Secret</code> to somewhere handy. </p>
 <p><img alt="dashboard" src="../images/dashboard.png" /></p>
 <h3 id="authentication">Authentication</h3>
 <p>In addition to the <code>id</code> and <code>secret</code> we've just gathered, Spotify requires us to <strong>authenticate</strong> prior to requesting data. </p>
-<p>There are several options available; we'll be using the <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">Client Credentials Flow</a>. This will give us access to masses of data about the contents of the Spotify catalogue, but without access to personalized information such as user playlists.</p>
+<p>There are several options available; we'll be using the <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow" target="_blank">Client Credentials Flow</a>. This will give us access to masses of data about the contents of the Spotify catalogue, but without access to personalized information such as user playlists.</p>
 <p>We'll send the <code>id</code> and <code>secret</code>to the API using a <code>POST</code> request, and be sent an <code>access_token</code> in the response.</p>
 <h3 id="obtaining-an-api-access_token">Obtaining an API <code>access_token</code></h3>
-<p>The <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">documentation</a> tells us that we'll need to:</p>
+<p>The <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow" target="_blank">documentation</a> tells us that we'll need to:</p>
 <ul>
 <li>send a <code>POST</code> request to <code>https://accounts.spotify.com/api/token</code></li>
 <li>include <code>'grant_type': 'client_credentials'</code> in the request <strong>body</strong></li>
@@ -149,7 +149,7 @@
 </ul>
 <p>Fortunately, the <code>requests.post()</code> and <code>HTTPBasicAuth</code> functions will simplify this for us.</p>
 <h3 id="replit-code-snippet">repl.it code snippet</h3>
-<p>First of all, <a href="https://repl.it/@datadesigns/mixtape-requests-auth">fork the repl</a>. You'll see a file called <code>.env.example</code>; replace the credentials with your own, and change the filename to <code>.env</code></p>
+<p>First of all, <a href="https://repl.it/@datadesigns/mixtape-requests-auth" target="_blank">fork the repl</a>. Next, create a new file called <code>.env</code>, and then enter your credentials in the format shown in <code>.env.example</code>.</p>
 <ul>
 <li><em><code>.env</code> files aren't shared when a fork of a repl is made; they allow you to store values you don't want to share</em></li>
 </ul>
@@ -233,7 +233,7 @@ response.ok
 <li>codes in the <code>400</code>s typcially indicate an issue with your code or parameters</li>
 <li>codes in the <code>500</code>s indicate something is malfunctioning on the server</li>
 </ul>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">More about response codes</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" target="_blank">More about response codes</a></p>
 <h2 id="json-data-structures">JSON data structures</h2>
 <p>JSON (<strong>JavaScript Object Notation</strong>) is the most popular data format used by web APIs.</p>
 <p>Fortunately for Python programmers, it is fairly straightforward to map JSON to equivalent Python data structures, data types and values (and as shown above, modules which can do this for us).</p>
