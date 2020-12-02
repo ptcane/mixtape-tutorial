@@ -48,7 +48,13 @@ First of all, [fork the repl](https://repl.it/@datadesigns/mixtape-requests-auth
 
 - *`.env` files aren't shared when a fork of a repl is made; they allow you to store values you don't want to share*
 
-`main.py` will be executed when you hit `Run`. If all is well, you should see a dictionary printed in the console below.
+`main.py` will be executed when you hit `Run`. If all is well, you should see a dictionary printed in the console at the bottom.
+
+!!! warning "Access Token" 
+
+    **Take a copy of your `access_token`** from your repl's console; you'll need it later to get data from the API. 
+    
+    Tokens are  **valid for one hour**, so come back to your fork of the repl to generate another one if needed later on. 
 
 
 <iframe height="800px" width="100%" src="https://repl.it/@datadesigns/mixtape-requests-auth?lite=false" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>

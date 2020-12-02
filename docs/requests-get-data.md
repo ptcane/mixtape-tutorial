@@ -25,7 +25,8 @@ We previously covered how REST APIs typically support `GET` requests, which can 
 
 ### repl.it code snippet
 
-Fork the [repl](https://repl.it/@datadesigns/mixtape-requests-get-data){target=_blank} and **copy your `access_token` into `main.py`** (you'll need to create a new one if it's more than an hour old).
+!!! warning "Access Token"  
+    Fork the [repl](https://repl.it/@datadesigns/mixtape-requests-get-data){target=_blank} and **copy your `access_token` into `main.py`** (you'll need to [create a new one](../requests-auth/#authorization){target=_blank} if it's more than an hour old).
 
 
 <iframe height="800px" width="100%" src="https://repl.it/@datadesigns/mixtape-requests-get-data?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>

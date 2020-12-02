@@ -19,7 +19,8 @@ Then, we can:
 
 ### repl.it code snippet
 
-Fork the [repl](https://repl.it/@datadesigns/mixtape-replit-database){target=_blank} and **copy your `access_token` into `main.py`** (you'll need to create a new one if it's more than an hour old).
+!!! warning "Access Token"  
+    Fork the [repl](https://repl.it/@datadesigns/mixtape-replit-database){target=_blank} and **copy your `access_token` into `auth.py`** (you'll need to [create a new one](../requests-auth/#authorization){target=_blank} if it's more than an hour old).
 
 
 

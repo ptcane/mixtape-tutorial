@@ -63,3 +63,7 @@ blockquote > p {
 ul {
   line-height: 200%;
 }
+
+h3.adios {
+    font-family: 'Rock Salt', cursive;
+}
