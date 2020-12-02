@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Intro to Web APIs - MixTape - Tutorial</title>
+        <title>Customizing Mixtape - MixTape - Tutorial</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -42,7 +42,7 @@
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="./" class="dropdown-item active">Intro to Web APIs</a>
+    <a href="../web-apis-intro/" class="dropdown-item">Intro to Web APIs</a>
 </li>
                                     
 <li>
@@ -62,7 +62,7 @@
 </li>
                                     
 <li>
-    <a href="../customizing-mixtape/" class="dropdown-item">Customizing Mixtape</a>
+    <a href="./" class="dropdown-item active">Customizing Mixtape</a>
 </li>
                                     
 <li>
@@ -74,12 +74,12 @@
 
                     <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a rel="prev" href=".." class="nav-link">
+                                <a rel="prev" href="../flask-jinja-templates/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../requests-auth/" class="nav-link">
+                                <a rel="next" href="../completed-example/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -101,17 +101,37 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="2"><a href="#whats-an-api" class="nav-link">What's an API?</a>
+            <li class="nav-item" data-level="2"><a href="#app-starter-kit" class="nav-link">App starter kit</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#web-apis" class="nav-link">Web APIs</a>
+            <li class="nav-item" data-level="2"><a href="#python-code-overview" class="nav-link">Python code overview</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="2"><a href="#get-and-post-requests" class="nav-link">GET and POST requests</a>
+            <li class="nav-item" data-level="2"><a href="#templates-overview" class="nav-link">Templates overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#things-to-do" class="nav-link">Things to do</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#bootstrap-styling" class="nav-link">Bootstrap styling</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#google-fonts" class="nav-link">Google fonts</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#css-variables" class="nav-link">CSS variables</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -121,68 +141,72 @@
                     <div class="col-md-9" role="main">
 
 <div class="content-links">
-<a target="_blank" href="../web-apis-intro-slides.html" class="btn btn-outline-secondary">Slideshow</a>
+<a target="_blank" href="../customizing-mixtape-slides.html" class="btn btn-outline-secondary">Slideshow</a>
 </div>
-<h1>Introduction to web APIs</h1>
-<h2 id="whats-an-api">What's an API?</h2>
-<p><strong>API</strong> stands for <strong>Application Programming Interface</strong>  </p>
+<h1>Customizing Mixtape</h1>
+<h2 id="app-starter-kit">App starter kit</h2>
+<p>Now it's time to apply what you've learned to complete your app!</p>
+<p>Fork the <a href="https://repl.it/@datadesigns/mixtape">repl</a> to get started.</p>
+<iframe height="1000px" width="100%" src="https://repl.it/@datadesigns/mixtape?lite=true&outputonly=1" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+
+<h2 id="python-code-overview">Python code overview</h2>
+<p>Let's take a quick look at the <code>.py</code> files in the repl; most of it should look familiar, or similar to what we've seen before.</p>
 <ul>
-<li>APIs allow applications to <strong>communicate</strong> with one another</li>
-<li>APIs <strong>simplify tasks</strong> requiring interactions with other systems</li>
+<li><code>main.py</code> serves a <code>flask</code> app with a single page, and does some processing for <code>POST</code> requests</li>
+<li><code>auth.py</code> has somewhere to put an <code>access_token</code> should we want to</li>
+<li><code>mixtape.py</code> contains <code>tracks_detail</code>, which is imported into <code>main.py</code> and used by <code>render_template()</code> </li>
+<li><code>tracks.py</code> has functions to fetch data from the Spotify API, and to extract summary information from it</li>
+<li><code>votes.py</code> has <code>reset_votes()</code> and <code>log_user_choice()</code> functions, which modify the <code>replit</code> database</li>
 </ul>
-<h2 id="web-apis">Web APIs</h2>
-<p>Web APIs are used to exchange data via the internet, and typically have the following characteristics:</p>
+<h2 id="templates-overview">Templates overview</h2>
 <ul>
-<li>
-<p>resources are accessed via URLs with the structure:<br />
-<code>{base_url}{endpoint}</code></p>
-</li>
-<li>
-<p>support data transfer using standard HTTP methods:<br />
-<code>GET</code>, <code>POST</code>, <code>PUT</code>, and <code>DELETE</code> </p>
-</li>
-<li>
-<p>data is transferred in the following formats:<br />
-<code>JSON</code>(most common and what we'll focus on), <code>XML</code> or <code>YAML</code></p>
-</li>
+<li>our <code>flask</code> app will use the <code>index.html</code> template to create our page</li>
+<li>the header and footer can be modified within <code>base.html</code></li>
+<li><code>index.html</code> uses <code>{% include ... }</code> to incorporate <code>top_section.html</code> and <code>tracks_section.html</code></li>
+<li><code>top_section</code> has no Jinja templating logic, i.e. dynamic elements to it</li>
+<li><code>tracks_section</code> has Jinja statements for the voting buttons but not track information</li>
 </ul>
-<h3 id="api-urls-example">API URLs: Example</h3>
-<p><code>https://api.spotify.com/v1</code> is the <strong>base URL</strong> for the main Spotify API, onto which numerous <strong>endpoints</strong> can be added, such as:</p>
-<p><code>/browse/categories</code><br />
-<code>/artists/albums</code><br />
-<code>/tracks/{id}</code>  </p>
+<h2 id="things-to-do">Things to do</h2>
+<p>First of all, work in <code>mixtape.py</code>:</p>
 <ul>
-<li>the URL itself may be used to target more specific data</li>
-<li>You may see the term <code>URI</code> used instead (Uniform Resource Identifier)</li>
+<li>use the <code>tracks.get_track_data()</code> function with a valid <code>access_token</code> and some <code>track_id</code>s of your choice to <strong>fetch data from Spotify</strong> (six is a good number of tracks)</li>
+<li>write this data to the <strong><code>replit</code> database</strong> so it can be retrieved in future without needing to request from the API again</li>
+<li>use <code>tracks.track_summary()</code> to <strong>extract data to display</strong> on the page, assigning it to <code>tracks_detail</code></li>
 </ul>
-<h2 id="get-and-post-requests"><code>GET</code> and <code>POST</code> requests</h2>
-<p>Our focus will be on <code>GET</code> and <code>POST</code> methods (also known as <strong>requests</strong>), which are the methods typcially needed to <strong>access data</strong> from a web API.</p>
+<p>Then, work in <code>tracks_section.html</code>:</p>
 <ul>
-<li><code>GET</code>: used to <strong>request data</strong> from the given resource  </li>
-<li><code>POST</code>: used to <strong>send data</strong> to create or update a resource</li>
+<li><strong>modify the template</strong> to display this data in the cards using Jinja statements</li>
 </ul>
-<h3 id="get-requests"><code>GET</code> requests</h3>
-<p><code>GET</code> requests can contain a <strong>query string</strong> of <code>key=value</code> pairs in the URL to request more specific data  </p>
+<p>Finally, see if you can add some different styling to the app. We'll take a look at how to do this now.</p>
+<h2 id="bootstrap-styling">Bootstrap styling</h2>
+<p>You'll notice in <code>base.html</code> that several <strong>stylesheets</strong> are imported, and that these can be found in the <code>/static</code> folder. </p>
 <ul>
-<li>
-<p>for example: <code>https://api.spotify.com/v1/browse/new-releases?country=SE&amp;limit=10</code></p>
-</li>
-<li>
-<p>the endpoint is followed by a <code>?</code> and <code>key=value</code> pairs, each separated by <code>&amp;</code></p>
-</li>
-<li>
-<p>these URLs can be cached, bookmarked, or held in the browser history; <em>not secure</em></p>
-</li>
+<li><code>bootstrap.css</code> was generated using the <a href="https://bootstrap.build/themes">bootstrap.build</a> service, using the <a href="https://bootstrap.build/app/project/UroRGaxfXxdg">Sandstone theme</a><ul>
+<li>the <code>_variables.scss</code> file allows you to retainany customizations made with the tool</li>
 </ul>
-<h3 id="post-requests"><code>POST</code> requests</h3>
-<p><code>POST</code> requests can send data within the <strong>request body</strong>  </p>
+</li>
+<li>the <a href="https://getbootstrap.com/docs/4.0/examples/album/">Album</a> example from the Bootstrap site was used as a basis for the page design and its CSS is in <code>album.css</code>  </li>
+<li><code>custom.css</code> includes some further customizations, to fonts and the design of the cards</li>
+</ul>
+<h2 id="google-fonts">Google fonts</h2>
+<p>Take a look at <code>custom.css</code>; at the top you'll see several <code>@import</code> statements, and then references to the imported fonts in the <code>font-family</code> attributes of some of the CSS class declarations:</p>
+<pre><code class="language-css">h1, h2 {
+     font-family: 'Rock Salt', cursive;
+     ...
+}
+</code></pre>
+<p><img alt="google-fonts" src="../images/google-fonts.png" /></p>
 <ul>
-<li>
-<p>not cached, more secure; we'll use these for <strong>authorization</strong> to access data via the API  </p>
-</li>
-<li>
-<p>although we're sending data, the term <strong>request</strong> is usually appropariate since we require a <strong>response</strong></p>
-</li>
+<li>we can get <code>@import</code> statements and associated <code>font-family</code> values for numerous other fonts from <a href="https://fonts.google.com/">Google Fonts</a></li>
+</ul>
+<h2 id="css-variables">CSS variables</h2>
+<pre><code class="language-css">h1, h2 {
+     ...
+     color: var(--dark);
+}
+</code></pre>
+<ul>
+<li>notice the use of a <strong>CSS variable</strong> to apply the <code>--dark</code> color (defined in and <strong>inherited</strong> from <code>bootstrap.css</code>)</li>
 </ul></div>
             </div>
         </div>

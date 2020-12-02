@@ -66,10 +66,10 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; margin: 0; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
-span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
 .highlight .c { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment */
@@ -14508,6 +14508,7 @@ div.jp-OutputPrompt {
 <li>pass Python data structures to be used by that template (such as lists and dictionaries)</li>
 </ul>
 <p>This is a powerful combination which is central to making our web pages <strong>dynamic</strong>.</p>
+<p>By default, Flask will look for templates in the <code>/templates</code> directory next to the application code.</p>
 
 </div>
 </div></section></section><section><section>
@@ -14545,6 +14546,7 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div class="highlight"><pre><span></span><span class="n">site_name</span> <span class="o">=</span> <span class="s1">&#39;Bucket List&#39;</span>
 <span class="n">activities</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">votes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
     <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.boredapi.com/api/activity?type=recreational&#39;</span><span class="p">)</span>
@@ -14557,15 +14559,40 @@ div.jp-OutputPrompt {
 </ul>
 </li>
 <li><code>activities</code> now has a list of dictionaries containing data for our page</li>
+<li><code>votes</code> is a list of values which we can subsequently modify</li>
 </ul>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+<h3 id="Using-request">Using <code>request</code><a class="anchor-link" href="#Using-request">&#182;</a></h3><p><code>flask.request</code> allows us to determine how a web page we've served with Flask was requested</p>
+<ul>
+<li>this isn't to be confused with the <code>requests</code> package we just used to fetch data<br>
+... but the terminology is the same, i.e. <code>GET</code> and <code>POST</code> requests</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+</pre></div>
+<ul>
+<li>the <code>methods</code> parameter determines which types of <code>request</code> for the given <code>route</code> i.e. URL are allowed; by default this is only <code>GET</code></li>
+</ul>
 
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">site_name</span><span class="o">=</span><span class="n">site_name</span><span class="p">,</span> <span class="n">activities</span><span class="o">=</span><span class="n">activities</span><span class="p">)</span>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">choice</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;choice&#39;</span><span class="p">])</span>
+        <span class="n">votes</span><span class="p">[</span><span class="n">choice</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+<ul>
+<li>if the page is served due to a <code>POST</code> request, we'll record the input by modifying our <code>votes</code> list</li>
+<li>if there's a <code>GET</code> request, this will be skipped and <code>votes</code> left unmodified</li>
+</ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Using-render_template()">Using <code>render_template()</code><a class="anchor-link" href="#Using-render_template()">&#182;</a></h3><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">site_name</span><span class="o">=</span><span class="n">site_name</span><span class="p">,</span> <span class="n">activities</span><span class="o">=</span><span class="n">activities</span><span class="p">,</span> <span class="n">votes</span><span class="o">=</span><span class="n">votes</span><span class="p">)</span>
 </pre></div>
 <ul>
 <li>we've called the <code>render_template()</code> function, giving our template file as the first argument, followed by two <strong>keyword arguments</strong> containing our data to be used by the template  </li>
@@ -14623,6 +14650,7 @@ _</li>
       <span class="p">&lt;</span><span class="nt">th</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>{{ loop.index }}<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
       <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ activity[&#39;activity&#39;] }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
       <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>{{ activity[&#39;price&#39;] }}<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+      ...  
     <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
    {% endfor %}
 </pre></div>
@@ -14633,6 +14661,23 @@ _</li>
 <li>zero-indexed values can be obtained using <code>loop.index0</code></li>
 </ul>
 </li>
+</ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Forms-and-POST-requests">Forms and <code>POST</code> requests<a class="anchor-link" href="#Forms-and-POST-requests">&#182;</a></h3><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;.&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-outline-primary&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{ loop.index0 }}&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;choice&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;badge badge-light&quot;</span><span class="p">&gt;</span>{{ votes[loop.index0] }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>  
+  <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+</pre></div>
+<ul>
+<li>in the last column of the table, we use a <code>form</code> with a <code>method</code> attribute of <code>POST</code></li>
+<li>the <code>action</code> attributes tells the browser <em>where</em> to send the data, with <code>.</code> meaning 'the current page'</li>
+<li>notice how the <code>name</code> and <code>value</code> attributes of the <code>button</code> match with our logic in the <code>index</code> function</li>
 </ul>
 
 </div>

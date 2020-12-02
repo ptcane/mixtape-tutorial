@@ -60,7 +60,7 @@ You'll notice in `base.html` that several **stylesheets** are imported, and that
 
 ## Google fonts
 
-Take a look at `custom.css`; at the top you'll see several `import` statements, and then references to the imported fonts in the `font-family` attributes of some of the CSS class declarations:
+Take a look at `custom.css`; at the top you'll see several `@import` statements, and then references to the imported fonts in the `font-family` attributes of some of the CSS class declarations:
 
 ```css
 h1, h2 {
@@ -68,6 +68,10 @@ h1, h2 {
      ...
 }
 ```
+
+![google-fonts](images/google-fonts.png)
+
+- we can get `@import` statements and associated `font-family` values for numerous other fonts from [Google Fonts](https://fonts.google.com/)
 
 ## CSS variables
 

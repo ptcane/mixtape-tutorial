@@ -60,6 +60,14 @@
 <li>
     <a href="./" class="dropdown-item active">Flask Web Apps</a>
 </li>
+                                    
+<li>
+    <a href="../customizing-mixtape/" class="dropdown-item">Customizing Mixtape</a>
+</li>
+                                    
+<li>
+    <a href="../completed-example/" class="dropdown-item">Completed Example</a>
+</li>
                                 </ul>
                             </li>
                         </ul>
@@ -71,7 +79,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../customizing-mixtape/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -190,7 +198,8 @@ app = Flask(__name__)
 <li>return a jinja template instead to be displayed (which itself may incorporate other templates)</li>
 <li>pass Python data structures to be used by that template (such as lists and dictionaries)</li>
 </ul>
-<p>This is a powerful combination which is central to making our web pages <strong>dynamic</strong>.</p>
+<p>This is a powerful combination which is central to making our web pages <strong>dynamic</strong>. </p>
+<p>By default, Flask will look for templates in the <code>/templates</code> directory next to the application code.</p>
 <h3 id="code-walkthrough-flask">Code walkthrough - Flask</h3>
 <p>Here's a Flask example which uses Jinja templating, including the code we've just seen:  </p>
 <p><a href="https://repl.it/@datadesigns/mixtape-flask-jinja#main.py">fork the repl</a></p>
@@ -198,6 +207,7 @@ app = Flask(__name__)
 
 <pre><code class="language-python">site_name = 'Bucket List'
 activities = []
+votes = [0, 0, 0, 0, 0]
 
 for i in range(5):
     resp = requests.get('https://www.boredapi.com/api/activity?type=recreational')
@@ -208,11 +218,30 @@ for i in range(5):
 <li>we've used <code>requests.get()</code> as seen previously to collect data from an API</li>
 <li>in this case, the <a href="https://www.boredapi.com">Bored API</a>, which doesn't require credentials</li>
 <li><code>activities</code> now has a list of dictionaries containing data for our page</li>
+<li><code>votes</code> is a list of values which we can subsequently modify</li>
 </ul>
-<pre><code class="language-python">@app.route('/')
-def index():
-
-    return render_template('index.html', site_name=site_name, activities=activities)
+<h3 id="using-request">Using <code>request</code></h3>
+<p><code>flask.request</code> allows us to determine how a web page we've served with Flask was requested</p>
+<ul>
+<li>this isn't to be confused with the <code>requests</code> package we just used to fetch data<br />
+... but the terminology is the same, i.e. <code>GET</code> and <code>POST</code> requests</li>
+</ul>
+<pre><code class="language-python">@app.route('/', methods=['GET', 'POST'])
+</code></pre>
+<ul>
+<li>the <code>methods</code> parameter determines which types of <code>request</code> for the given <code>route</code> i.e. URL are allowed; by default this is only <code>GET</code></li>
+</ul>
+<pre><code class="language-python">def index():
+    if request.method == 'POST':
+        choice = int(request.form['choice'])
+        votes[choice] += 1
+</code></pre>
+<ul>
+<li>if the page is served due to a <code>POST</code> request, we'll record the input by modifying our <code>votes</code> list</li>
+<li>if there's a <code>GET</code> request, this will be skipped and <code>votes</code> left unmodified</li>
+</ul>
+<h3 id="using-render_template">Using <code>render_template()</code></h3>
+<pre><code class="language-python">    return render_template('index.html', site_name=site_name, activities=activities, votes=votes)
 </code></pre>
 <ul>
 <li>we've called the <code>render_template()</code> function, giving our template file as the first argument, followed by two <strong>keyword arguments</strong> containing our data to be used by the template  </li>
@@ -259,6 +288,7 @@ _</li>
       &lt;th scope=&quot;row&quot;&gt;{{ loop.index }}&lt;/th&gt;
       &lt;td&gt;{{ activity['activity'] }}&lt;/td&gt;
       &lt;td&gt;{{ activity['price'] }}&lt;/td&gt;
+      ...  
     &lt;/tr&gt;
    {% endfor %}
 </code></pre>
@@ -269,6 +299,20 @@ _</li>
 <li>zero-indexed values can be obtained using <code>loop.index0</code></li>
 </ul>
 </li>
+</ul>
+<h3 id="forms-and-post-requests">Forms and <code>POST</code> requests</h3>
+<pre><code class="language-html">&lt;td&gt;
+  &lt;form action=&quot;.&quot; method=&quot;POST&quot;&gt;
+    &lt;button type=&quot;submit&quot; class=&quot;btn btn-outline-primary&quot; value=&quot;{{ loop.index0 }}&quot; name=&quot;choice&quot;&gt;
+      &lt;span class=&quot;badge badge-light&quot;&gt;{{ votes[loop.index0] }}&lt;/span&gt;
+    &lt;/button&gt;  
+  &lt;/form&gt;
+&lt;/td&gt; 
+</code></pre>
+<ul>
+<li>in the last column of the table, we use a <code>form</code> with a <code>method</code> attribute of <code>POST</code></li>
+<li>the <code>action</code> attributes tells the browser <em>where</em> to send the data, with <code>.</code> meaning 'the current page'</li>
+<li>notice how the <code>name</code> and <code>value</code> attributes of the <code>button</code> match with our logic in the <code>index</code> function</li>
 </ul></div>
             </div>
         </div>

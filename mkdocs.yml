@@ -10,6 +10,9 @@ nav:
     - Getting Data: 'requests-get-data.md'
     - Replit Database: 'replit-database.md'
     - Flask Web Apps: 'flask-jinja-templates.md'
+    - Customizing Mixtape: 'customizing-mixtape.md'
+    - Completed Example: 'completed-example.md'
+    
   
 
 markdown_extensions:

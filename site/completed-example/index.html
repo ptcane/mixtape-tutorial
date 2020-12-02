@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Replit Database - MixTape - Tutorial</title>
+        <title>Completed Example - MixTape - Tutorial</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -54,7 +54,7 @@
 </li>
                                     
 <li>
-    <a href="./" class="dropdown-item active">Replit Database</a>
+    <a href="../replit-database/" class="dropdown-item">Replit Database</a>
 </li>
                                     
 <li>
@@ -66,7 +66,7 @@
 </li>
                                     
 <li>
-    <a href="../completed-example/" class="dropdown-item">Completed Example</a>
+    <a href="./" class="dropdown-item active">Completed Example</a>
 </li>
                                 </ul>
                             </li>
@@ -74,12 +74,12 @@
 
                     <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a rel="prev" href="../requests-get-data/" class="nav-link">
+                                <a rel="prev" href="../customizing-mixtape/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../flask-jinja-templates/" class="nav-link">
+                                <a rel="next" class="nav-link disabled">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -101,12 +101,27 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="2"><a href="#database-commands" class="nav-link">Database commands</a>
+            <li class="nav-item" data-level="2"><a href="#example-app" class="nav-link">Example app</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
             <li class="nav-item" data-level="2"><a href="#code-walkthrough" class="nav-link">Code walkthrough</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#data-collection" class="nav-link">Data collection</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#jinja-template" class="nav-link">Jinja template</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="2"><a href="#adios-amigos" class="nav-link">Adios amigos!</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -116,104 +131,93 @@
                     <div class="col-md-9" role="main">
 
 <div class="content-links">
-<a target="_blank" href="../replit-database-slides.html" class="btn btn-outline-secondary">Slideshow</a>
+<a target="_blank" href="../completed-example-slides.html" class="btn btn-outline-secondary">Slideshow</a>
 </div>
-<h1>The repl.it database</h1>
-<h2 id="database-commands">Database commands</h2>
-<p>There's a simple <strong>key:value store</strong> associated with every repl. To work with it in Python, we first <strong>import</strong> the <code>db</code> module from <code>replit</code>:</p>
-<pre><code>from replit import db
-</code></pre>
-<p>Then, we can:</p>
-<ul>
-<li><strong>Set</strong> values: <code>db['my_key'] = my_value</code>  </li>
-<li><strong>Get</strong> values: <code>my_variable = db['my_key']</code>  </li>
-<li><strong>Delete</strong> entries: <code>del db['my_key']</code>  </li>
-<li><strong>List</strong> the keys: <code>list(db.keys())</code></li>
-<li><strong>Clear</strong> the database: <code>db.clear()</code></li>
-</ul>
-<h3 id="replit-code-snippet">repl.it code snippet</h3>
-<p>Fork the <a href="https://repl.it/@datadesigns/mixtape-replit-database">repl</a> and <strong>copy your <code>access_token</code> into <code>main.py</code></strong> (you'll need to create a new one if it's more than an hour old).</p>
-<iframe height="800px" width="100%" src="https://repl.it/@datadesigns/mixtape-replit-database?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+<h1>Completed Example</h1>
+<h2 id="example-app">Example app</h2>
+<p>Here's a <a href="https://repl.it/@datadesigns/mixtape-example">repl</a> with <code>mixtape.py</code> completed, and the cards filled using data previously written to the <code>replit</code> database:</p>
+<iframe height="1000px" width="100%" src="https://repl.it/@datadesigns/mixtape-example?lite=true&outputonly=1" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 
 <h2 id="code-walkthrough">Code walkthrough</h2>
-<pre><code class="language-python">from auth import access_token
-</code></pre>
+<p>Most of the remaining code was added to the following files:  </p>
 <ul>
-<li>we've imported <code>access_token</code> from <code>auth.py</code> (in which we copied our own token), and can now use <code>access_token</code> in our subequent code</li>
+<li><strong><code>mixtape.py</code></strong>: so that <code>tracks_detail</code>, imported into <code>main.py</code>, contains the necessary data for our template  </li>
+<li><strong><code>templates/track_section.html</code></strong>: so that the cards for each track are automatically populated using this data </li>
 </ul>
-<pre><code class="language-python">from replit import db
-</code></pre>
-<ul>
-<li>we've imported the <code>db</code> module from <code>replit</code> so we can use its methods to work with the database</li>
-</ul>
-<pre><code class="language-python">from tracks import get_track_data, track_summary
-</code></pre>
-<ul>
-<li>we've imported some functions from <code>tracks.py</code> which we'll use later</li>
-</ul>
-<pre><code class="language-python">db.clear()
-</code></pre>
-<ul>
-<li>the <code>.clear()</code> method will remove all content (keys and values) from the database<ul>
-<li>remove or comment out this line if you want to re-run <code>main.py</code> without doing so...</li>
-</ul>
-</li>
-</ul>
-<pre><code class="language-python">track_id = '2H7PHVdQ3mXqEHXcvclTB0' #'7azo4rpSUh8nXgtonC6Pkq'
-track_data = get_track_data(access_token, track_id)
-</code></pre>
-<ul>
-<li>we assign a value to <code>track_id</code> (the commented out one is an alternative for you to try), and then call the <code>get_track_data()</code> function, using <code>access_token</code> and <code>track_id</code> as <strong>arguments</strong>, assigning the result to <code>track_data</code></li>
-</ul>
-<h3 id="get_track_data-function"><code>get_track_data()</code> function</h3>
-<p>Take a look at <code>tracks.py</code>; you'll see the <strong>function definitions</strong> for the two functions we imported from there into <code>main.py</code>.  </p>
-<ul>
-<li>
-<p><code>get_track_data()</code> will attempt to collect the track data from the Spotify API as we have seen previously, using the <code>access_token</code> and <code>track_id</code> supplied to it  </p>
-<ul>
-<li>if successful, <code>track_data</code> in <code>main.py</code> will hold the returned data  </li>
-<li>if not, an error will be printed and the <code>track_data</code> value will be <code>None</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="writing-to-the-database">Writing to the database</h3>
-<pre><code class="language-python">if track_data:
-    db[track_id] = track_data
-</code></pre>
-<ul>
-<li>if the <code>track_data</code> value is '<strong>truthy</strong>' (by this we mean not empty, zero, <code>False</code> or <code>None</code>), the following line will be executed, and <code>track_data</code> will be written to the database, as the value associated with the key of <code>track_id</code></li>
-<li>if <code>get_track_data()</code> returned <code>None</code>, <code>track_data</code> would therefore be <code>None</code>, and the line underneath the <code>if</code> statement will be skipped</li>
-</ul>
-<h3 id="reading-from-the-database">Reading from the database</h3>
-<pre><code class="language-python">print(list(db.keys()))
+<p>Collection of the data from the API of course requires a valid <code>access_token</code>, which was updated in <code>auth.py</code>.  </p>
+<p>The <code>reset_votes()</code> statement in <code>main.py</code> has also been commented out after the first execution of <code>main.py</code>, so that the vote counts are retained even if the repl is re-started.</p>
+<h2 id="data-collection">Data collection</h2>
+<p>Let's go through <code>mixtape.py</code>:</p>
+<pre><code class="language-python">
+from auth import access_token
+from tracks import get_track_data, track_summary
+from replit import db
 
-print(track_summary(db[track_id]))
+track_ids = [...]
+tracks_detail = []
+
 </code></pre>
 <ul>
-<li>
-<p>we used the <code>.keys()</code> method to fetch a list of the database <strong>keys</strong>; the object returned by this method is an <strong>iterable</strong>, on which we need to use the Python built-in <code>list()</code> function to get the keys themselves</p>
-</li>
-<li>
-<p>we called the <code>track_summary()</code> function, using the value from the database associated with the key equal to <code>track_id</code>, i.e. the data previously fetched from the API and stored there  </p>
-<ul>
-<li>this function would throw an error if the key isn't in the database  </li>
-<li>we <code>print()</code> the value returned by <code>track_summary()</code> function</li>
+<li>we've imported the various components we require from several other <code>.py</code> files</li>
+<li>we've specified six <code>track_ids</code> that we want to collect data for</li>
+<li>we've created an empty list called <code>tracks_detail</code>     </li>
 </ul>
-</li>
-</ul>
-<h3 id="track_summary-function"><code>track_summary()</code> function</h3>
-<p>We can see what <code>track_summary()</code> will do by looking at the code in <code>tracks.py</code>:</p>
-<pre><code class="language-python">summary = {
-        'track_name': track_data['name'],
-        'artist_name': track_data['artists'][0]['name'],
-        'album_name': track_data['album']['name'],
-        'image_url': track_data['album']['images'][0]['url'],
-    }
+<pre><code class="language-python">
+for track_id in track_ids:
+
+    if track_id in db.keys():
+        data = db[track_id]       
+    else:
+        data = get_track_data(access_token, track_id)    
+    ...
 </code></pre>
 <ul>
-<li>the function extracts specific <strong>features</strong> nested in <code>track_data</code> (which contained everything in the response sent by the Spotify API to our request for the given track), and returns a dictionary  </li>
+<li>we're going to <strong>iterate</strong> through each entry in <code>track_ids</code> using a <code>for</code> loop</li>
+<li>we check to see if <code>track_id</code> is a key in the <code>db</code> (meaning it has been stored previously)</li>
+<li>if it's in the <code>db</code> we collect the data from there</li>
+<li>if not, we use <code>get_track_data()</code> to collect it from the Spotify API</li>
 </ul>
-<p>We could have extracted these features <em>before</em> writing to the database and then only storing this smaller dataset - but by storing <em>all</em> of the data from the API response, we could change which features we want to use later on, without having to make another request to the API.</p></div>
+<pre><code class="language-python">    ...
+    if not data:
+        print(f'Something went wrong with track {track_id}')
+
+    else:
+        tracks_detail.append(track_summary(data))
+</code></pre>
+<ul>
+<li>we check to see if <code>data</code> is not "truthy", i.e. it is not <code>None</code>, empty, zero, etc (if there has been an issue with collecting the data from the API, <code>get_track_data()</code> would have returned <code>None</code>)</li>
+<li>if <code>data</code> is truthy, we process it using <code>tracks_detail()</code> and <code>.append()</code> the result (which will be a dictionary) to our <code>tracks_detail</code> list, which is imported by <code>main.py</code></li>
+</ul>
+<h2 id="jinja-template">Jinja template</h2>
+<p>Take a look at <code>tracks_section.html</code> in <code>/templates</code>.</p>
+<pre><code class="language-html">{% for track in tracks_detail %}
+...
+&lt;img class=&quot;card-img-top img-responsive full-width&quot; src=&quot;{{ track['image_url'] }}&quot;&gt;
+</code></pre>
+<p>The Jinja <code>for</code> statement was already in place, to create a card for each item in <code>tracks_detail</code>.</p>
+<ul>
+<li>in the original file, <code>data-src</code> was used with the <code>holder.js</code> image placeholder service</li>
+<li>here we use <code>src</code>, and the value is changed to use the <code>image_url</code> for the given <code>track</code></li>
+</ul>
+<pre><code class="language-html">&lt;p class=&quot;card-text&quot;&gt; 
+    &lt;strong&gt;{{ track['track_name'] }}&lt;/strong&gt;&lt;br&gt;
+    {{ track['artist_name'] }}
+&lt;/p&gt;
+</code></pre>
+<ul>
+<li>within the <code>card-text</code> paragraph, we've added the <code>track_name</code> and <code>artist_name</code> values from each <code>track</code> dictionary in <code>track_details</code></li>
+<li>we've used a <code>strong</code> tag to make the text for <code>artist_name</code> more prominent</li>
+</ul>
+<h2 id="adios-amigos">Adios amigos!</h2>
+<p>If you enjoyed the project and would like to go further, check out the <a href="https://seeder.datadesigns.repl.co/">Seeder app</a> and <a href="https://seeder-tutorial.datadesigns.repl.co/">tutorial</a>, where we:</p>
+<ul>
+<li>automatically <strong>refresh our access token</strong> when required</li>
+<li>automatically <strong>refresh our tracks</strong> each day based on previous votes</li>
+<li>add <strong>repl.it login functionality</strong> so users can only vote once each day</li>
+<li>handle <strong>multiple concurrent users</strong> with Flask <code>session</code> logic</li>
+<li>create <strong>data visualisations</strong> using track features data from Spotify</li>
+</ul>
+<p>Finally, please <a href="https://www.datadesigns.co.uk/contact/">get in touch</a> with me if you have any questions, comments, or feedback. Cheers!</p></div>
             </div>
         </div>
 
