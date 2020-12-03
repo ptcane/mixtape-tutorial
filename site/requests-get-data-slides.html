@@ -14388,7 +14388,7 @@ div.jp-OutputPrompt {
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="API-endpoints">API endpoints<a class="anchor-link" href="#API-endpoints">&#182;</a></h2><p>Our first port of call should be the <a href="https://developer.spotify.com/documentation/web-api/reference/">documentation</a>{target=_blank} - take a look around the sections in the <strong>API Endpoint Reference</strong>.</p>
+<h2 id="API-endpoints">API endpoints<a class="anchor-link" href="#API-endpoints">&#182;</a></h2><p>Our first port of call should be the <a href="https://developer.spotify.com/documentation/web-api/reference/">documentation</a> - take a look around the sections in the <strong>API Endpoint Reference</strong>.</p>
 <p>You'll discover:</p>
 <ul>
 <li>the <code>base_url</code> for the API is <code>https://api.spotify.com/v1</code></li>
@@ -14405,7 +14405,7 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Using-requests.get()">Using <code>requests.get()</code><a class="anchor-link" href="#Using-requests.get()">&#182;</a></h2><p>We previously covered how REST APIs typically support <code>GET</code> requests, which can be used to <strong>retrieve data</strong> from the API.</p>
 <h3 id="repl.it-code-snippet">repl.it code snippet<a class="anchor-link" href="#repl.it-code-snippet">&#182;</a></h3><p>!!! warning "Access Token"<br>
-    Fork the <a href="https://repl.it/@datadesigns/mixtape-requests-get-data">repl</a>{target=_blank} and <strong>copy your <code>access_token</code> into <code>main.py</code></strong> (you'll need to <a href="../requests-auth/#authorization">create a new one</a>{target=_blank} if it's more than an hour old).</p>
+    Fork the <a href="https://repl.it/@datadesigns/mixtape-requests-get-data">repl</a> and <strong>copy your <code>access_token</code> into <code>main.py</code></strong> (you'll need to <a href="../requests-auth/#authorization">create a new one</a> if it's more than an hour old).</p>
 
 </div>
 </div></section></section><section><section>
@@ -14439,7 +14439,7 @@ div.jp-OutputPrompt {
 <li>we created a <code>headers</code> dictionary, with this <code>parameter:value</code> pair:<br>
   <code>Authorization: Bearer [access_token]</code></li>
 </ul>
-<p><em>Notice that we had to do some work to get the value in the format the API requires (with <code>Bearer</code> before the <code>access_token</code>); this is mentioned in the <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">API documentation</a>{target=_blank} but wasn't clear to me before Google came to the rescue.</em></p>
+<p><em>Notice that we had to do some work to get the value in the format the API requires (with <code>Bearer</code> before the <code>access_token</code>); this is mentioned in the <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">API documentation</a> but wasn't clear to me before Google came to the rescue.</em></p>
 
 </div>
 </div></section></section><section><section>
@@ -14468,7 +14468,7 @@ div.jp-OutputPrompt {
 <ul>
 <li><p>the URL is in component parts and combined using an f-string; this will allow us to make further requests to different endpoints more easily</p>
 </li>
-<li><p>the <code>identifier</code> value is a <code>track_id</code>; you can get these from the  <a href="https://open.spotify.com/">Spotify Web Player</a>{target=_blank}:</p>
+<li><p>the <code>identifier</code> value is a <code>track_id</code>; you can get these from the  <a href="https://open.spotify.com/">Spotify Web Player</a>:</p>
 <ul>
 <li>right-click on any <strong>song title</strong></li>
 <li>click <code>Share</code> then <code>Copy Song Link</code></li>

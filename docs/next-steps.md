@@ -7,10 +7,11 @@
 
 If you enjoyed the project and would like to go further, check out the [Seeder app](https://seeder.datadesigns.repl.co/){target=_blank} and [tutorial](https://seeder-tutorial.datadesigns.repl.co/){target=_blank}, where we:
 
-- automatically **get a new access token** when required
-- automatically **refresh our tracks** each day based on previous votes
+- use **query parameters** to make more detailed API calls
+- **automatically fetch new tracks** each day based on previous votes
 - add **repl.it login functionality** so users can only vote once each day
 - create **data visualisations** using track features data from Spotify
+
 
 ## Get in touch
 

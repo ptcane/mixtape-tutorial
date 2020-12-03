@@ -14399,7 +14399,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Obtaining-Spotify-API-credentials">Obtaining Spotify API credentials<a class="anchor-link" href="#Obtaining-Spotify-API-credentials">&#182;</a></h3><p>We'll be using the <strong>Spotify API</strong> throughout the tutorial. In order to use it, you'll need a Spotify account.</p>
-<p><a href="https://developer.spotify.com/dashboard/">Log in or sign up (free)</a>{target=_blank}</p>
+<p><a href="https://developer.spotify.com/dashboard/">Log in or sign up (free)</a></p>
 <p>Follow <code>CREATE AN APP</code> from the Dashboard, then copy your <code>Client ID</code> and <code>Client Secret</code> to somewhere handy.</p>
 <p><img src="images/dashboard.png" alt="dashboard"></p>
 
@@ -14407,13 +14407,13 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Authentication">Authentication<a class="anchor-link" href="#Authentication">&#182;</a></h3><p>In addition to the <code>id</code> and <code>secret</code> we've just gathered, Spotify requires us to <strong>authenticate</strong> prior to requesting data.</p>
-<p>There are several options available; we'll be using the <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">Client Credentials Flow</a>{target=_blank}. This will give us access to masses of data about the contents of the Spotify catalogue, but without access to personalized information such as user playlists.</p>
+<p>There are several options available; we'll be using the <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">Client Credentials Flow</a>. This will give us access to masses of data about the contents of the Spotify catalogue, but without access to personalized information such as user playlists.</p>
 <p>We'll send the <code>id</code> and <code>secret</code>to the API using a <code>POST</code> request, and be sent an <code>access_token</code> in the response.</p>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Obtaining-an-API-access_token">Obtaining an API <code>access_token</code><a class="anchor-link" href="#Obtaining-an-API-access_token">&#182;</a></h3><p>The <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">documentation</a>{target=_blank} tells us that we'll need to:</p>
+<h3 id="Obtaining-an-API-access_token">Obtaining an API <code>access_token</code><a class="anchor-link" href="#Obtaining-an-API-access_token">&#182;</a></h3><p>The <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow">documentation</a> tells us that we'll need to:</p>
 <ul>
 <li>send a <code>POST</code> request to <code>https://accounts.spotify.com/api/token</code></li>
 <li>include <code>'grant_type': 'client_credentials'</code> in the request <strong>body</strong></li>
@@ -14424,7 +14424,7 @@ div.jp-OutputPrompt {
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="repl.it-code-snippet">repl.it code snippet<a class="anchor-link" href="#repl.it-code-snippet">&#182;</a></h3><p>First of all, <a href="https://repl.it/@datadesigns/mixtape-requests-auth">fork the repl</a>{target=_blank}. Next, create a new file called <code>.env</code>, and then enter your credentials in the format shown in <code>.env.example</code>.</p>
+<h3 id="repl.it-code-snippet">repl.it code snippet<a class="anchor-link" href="#repl.it-code-snippet">&#182;</a></h3><p>First of all, <a href="https://repl.it/@datadesigns/mixtape-requests-auth">fork the repl</a>. Next, create a new file called <code>.env</code>, and then enter your credentials in the format shown in <code>.env.example</code>.</p>
 <ul>
 <li><em><code>.env</code> files aren't shared when a fork of a repl is made; they allow you to store values you don't want to share</em></li>
 </ul>
@@ -14706,7 +14706,7 @@ post(url, data=None, json=None, **kwargs)
 <li>codes in the <code>400</code>s typcially indicate an issue with your code or parameters</li>
 <li>codes in the <code>500</code>s indicate something is malfunctioning on the server</li>
 </ul>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">More about response codes</a>{target=_blank}</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">More about response codes</a></p>
 
 </div>
 </div></section></section><section><section>

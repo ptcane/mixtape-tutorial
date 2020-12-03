@@ -7,7 +7,6 @@ from nbconvert import MarkdownExporter, SlidesExporter
 from nbconvert.preprocessors import TagRemovePreprocessor
 import re
 from glob import glob
-import time
 
 nbs = glob(r'notebooks/*.ipynb')
 print(nbs)
@@ -108,9 +107,11 @@ for nb in md_nbs:
 for nb in rv_nbs:
     
     text, resources = rv_exp.from_file(nb)
-    #time.sleep(3)
+    
     nb_name = nb.rsplit(r'/')[1].split('.')[0]
     slides_dest = f'docs/{nb_name}-slides.html'
+
+    text = text.replace(r'{target=_blank}','')
 
     with open(slides_dest, 'a') as f:
         f.write(text)
