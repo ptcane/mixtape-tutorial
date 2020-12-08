@@ -32,9 +32,6 @@ h4 {font-size: 1.25rem}
 h5 {font-size: 1rem}
 h6 {font-size: 1rem}
 
-
-strong{color: var(--info);}
-
 h2  {
     border-top: 1px solid var(--light);
     padding-top: 30px;

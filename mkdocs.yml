@@ -1,7 +1,7 @@
 site_name: MixTape - Tutorial
 theme: 
     name: bootswatch
-    name: flatly
+    name: lumen
 nav: 
   - Overview: 'index.md'
   - Tutorial: 
