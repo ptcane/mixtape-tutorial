@@ -112,6 +112,8 @@ for nb in rv_nbs:
     slides_dest = f'docs{os.sep}{nb_name}-slides.html'
 
     text = text.replace(r'{target=_blank}','')
+    text = text.replace(r'{.adios}','')
+
 
     with open(slides_dest, 'w') as f:
         f.write(text)
